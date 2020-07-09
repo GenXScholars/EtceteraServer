@@ -1,0 +1,26 @@
+{
+  "name": "epaymentserver",
+  "version": "1.0.0",
+  "description": "Epayment Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "jasmine"
+  },
+  "author": "Adjaro Ogaga",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.0",
+    "mongoose": "^5.9.20",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
+}
