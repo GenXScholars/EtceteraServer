@@ -8,7 +8,9 @@ module.exports = Object.freeze({
         name: 'ADJARO OGAGA',
         contact: 'ogagaadjaro@gmail.com'
     },
-    MONGO_URI : 'mongodb+srv://ogaga:1986LORDo@cluster0-yuz76.azure.mongodb.net/ogaga?retryWrites=true&w=majority',
+    PORT :  process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : (process.env.NODE_ENV === 'test' ? 3030 : 4000),
+     MONGO_URI : 'mongodb+srv://ogaga:1986LORDo@cluster0-yuz76.azure.mongodb.net/epayment?retryWrites=true&w=majority',
+    // MONGO_URI : 'mongodb://localhost/epayment',
     MONGO_OPTIONS : {
         useNewUrlParser: true ,
         useUnifiedTopology : true, // to use the mongodb engine ... removing reconnecTries && autoReconect & reconnect interval option
@@ -21,5 +23,15 @@ module.exports = Object.freeze({
         connectTimeoutMS : 10000, // Times out connectio after 10 seconds
         socketTimeoutMS : 45000,   // close sockets after 45 seconds of inactity
         family : 4,
-    }
+    },
+    MONGO_URI_TEST :'mongodb+srv://ogagatest:ogagatest@cluster0.dcflv.azure.mongodb.net/ogagatest?retryWrites=true&w=majority',
+    MONGO_OPTIONS_TEST : { 
+        useNewUrlParser: true ,
+        useUnifiedTopology : true, // to use the mongodb engine ... removing reconnecTries && autoReconect & reconnect interval option
+        useFindAndModify : false,
+        // server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+        // replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
+      },
+    // jwt constants
+    SECRET:'mysecret',
 })

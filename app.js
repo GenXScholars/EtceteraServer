@@ -1,33 +1,51 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const passport = require('passport');
-const { connection } = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const JWT = require('jsonwebtoken');
+const jwt = require('./_helpers/jwt');
+const errorHandler = require('./_helpers/errorhandler');
+const config = require('./config/constants');
  require('./config/dbconnection');
+ 
 
-
-
-// middleware config
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({
-     secret: 'keyboard cat',
-      resave: true, 
-      saveUninitialized: true}));
+// middleware configurations 
+app.use(morgan('dev'));
+app.use(jwt());
+app.use(cors());
+// parse application/x-www-;form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-const port = process.env.PORT || 3070;
 
 
-app.use('/', (req, res)=>{
-    console.log(passport);
-    console.log(req.session);
-     res.status(200).json(
-         {
-             message :"I am the home page"
-         }
-     )
+
+// configure routes--------start
+ const userRouter = require('./routes/userRoute');
+ app.use(userRouter);
+
+
+//  configure routes----------------end
+
+
+// global error handler
+app.use(errorHandler);
+// app.use('/', (req, res)=>{
+//     console.log(JWT);
+//      res.json(
+//          {
+//              message :"I am the home page",
+            
+//          }
+//      )
+// })
+
+
+app.listen(config.PORT, ()=>{
+    console.log("server running on port" + " " + config.PORT)
 })
 
-
-app.listen(port, ()=>{
-    console.log("server running on port" + " " + port)
-})
+module.exports = app;

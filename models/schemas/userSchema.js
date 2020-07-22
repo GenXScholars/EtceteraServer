@@ -1,22 +1,31 @@
+const mongoose = require('mongoose');
 module.exports.schemas = {
-    userName:{
+    email: {
+        type: String,
+        unique:true,
+        required: true,
+    },
+    username:{
         type:String,
+        unique: true,
         required: true
     },
     firstName:{
-        type: String,
-        required: true
+        type: String
     },
     lastName:{
-        type: String,
-        required: true
+        type: String
     },
     password:{
         type:String,
-        required:true,
+        required: true,
     },
     merchantId:{
         type:Number
+    },
+    dateCreated:{
+        type: Date,
+        default: Date.now
     },
     role: {
         type: String,
