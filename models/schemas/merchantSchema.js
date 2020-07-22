@@ -1,17 +1,19 @@
+const mongoose = require('mongoose');
+
 module.exports.schemas = {
     email:{
         type: String,
         unique: true,
         required: true,
     },
-    userName:{
+    username:{
         type:String,
         required: true
     },
-    firstName:{
+    firstname:{
         type: String,
     },
-    lastName:{
+    lastname:{
         type: String,
     },
     password:{

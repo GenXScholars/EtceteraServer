@@ -14,7 +14,8 @@ function jwt() {
             '/api/merchant-signUp',
             '/api/user-login',
             '/api/merchant-login',
-            '/api/users'
+            '/api/users',
+            '/api/merchants'
         ]
     });
 }
