@@ -30,7 +30,7 @@ describe("Merchants", () => {
           if (err) done(err);
           res.should.have.status(200);
           res.body.should.be.an("array");
-          res.body.length.should.be.equal(1);
+          res.body.length.should.be.equal(0);
           done();
         });
     });
