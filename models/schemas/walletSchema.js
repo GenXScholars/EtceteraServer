@@ -1,6 +1,7 @@
 module.exports.schemas = {
     availableBalance:{
-        type: String
+        type: String,
+        required: true,
     },
     merchant : [
         {type: mongoose.Schema.Types.ObjectId,ref:'Merchant'}

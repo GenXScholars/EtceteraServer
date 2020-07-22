@@ -1,6 +1,7 @@
 module.exports.schemas = {
     orderType:{
         type: String,
+        required: true,
         enum: ['MOBILE RECHARGE', 'CABLE RECHARGE', 'ELECTRICITY RECHARGE', 'BANK TRANSFER']
     },
     merchant : [

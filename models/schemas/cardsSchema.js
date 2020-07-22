@@ -1,6 +1,7 @@
 module.exports.schemas = {
     cardNumber:{
         type: String,
+        unique: true,
         required: true,
     },
     cardValidity:{

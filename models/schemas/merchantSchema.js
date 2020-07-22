@@ -1,19 +1,26 @@
 module.exports.schemas = {
+    email:{
+        type: String,
+        unique: true,
+        required: true,
+    },
     userName:{
         type:String,
         required: true
     },
     firstName:{
         type: String,
-        required: true
     },
     lastName:{
         type: String,
-        required: true
     },
     password:{
         type:String,
         required:true,
+    },
+    merchantId:{
+        type:String,
+        default: Math.floor(Math.random() *10000),
     },
     role: {
         type: String,
