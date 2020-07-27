@@ -14,8 +14,8 @@ function jwt() {
             '/api/merchant-signUp',
             '/api/user-login',
             '/api/merchant-login',
-            '/api/users',
-            '/api/merchants'
+            '/api/users', // to br removed and acessed only when authenticated
+            '/api/merchants' // to be removed and acessed only via authentication
         ]
     });
 }
