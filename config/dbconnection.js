@@ -18,7 +18,7 @@ if(process.env.NODE_ENV === 'test'){
 
 //db  connection for development
 
-if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development' ) {
+
      connection = mongoose.connect(params.MONGO_URI, () => { },  params.MONGO_OPTIONS )
     .then(() =>{
         console.log('db connected');
@@ -26,6 +26,6 @@ if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'developmen
         .catch(err => {
             console.log(err);
         });
-}
+
 
 module.exports = connection;

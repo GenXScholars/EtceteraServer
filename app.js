@@ -27,6 +27,9 @@ app.use(passport.session());
  const userRouter = require('./routes/userRoute');
  app.use(userRouter);
 
+ const merchantRouter = require('./routes/merchantRoutes');
+ app.use(merchantRouter);
+
 
 //  configure routes----------------end
 

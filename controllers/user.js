@@ -22,7 +22,6 @@ async function  userLogin(req, res, next){
     const user = await User.findOne({username});
     if(user){
      bcrypt.compare(password, user.password).then((result) => {
-       console.log(res);
        if(!result){
               //user password in the token so we pick only the email and id
       const body = { _id : user._id, username : user.username };
