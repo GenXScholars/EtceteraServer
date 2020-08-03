@@ -20,9 +20,11 @@ async function  userLogin(req, res, next){
        })
     }
     const user = await User.findOne({username});
+    console.log(user);
     if(user){
      bcrypt.compare(password, user.password).then((result) => {
-       if(!result){
+         console.log("result"+ "is" + result )
+       if(result){
               //user password in the token so we pick only the email and id
       const body = { _id : user._id, username : user.username };
       //Sign the JWT token and populate the payload with the user email and id

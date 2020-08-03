@@ -23,7 +23,7 @@ async function  merchantLogin(req, res, next){
     if(merchant){
      bcrypt.compare(password, merchant.password).then((result) => {
        console.log(res);
-       if(!result){
+       if(result){
               //merchant password in the token so we pick only the email and id
       const body = { _id : merchant._id, username : merchant.username };
       //Sign the JWT token and populate the payload with the merchant email and id
