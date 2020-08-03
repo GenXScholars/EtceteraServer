@@ -1,5 +1,6 @@
+const mongoose = require('mongoose');
 module.exports.schemas = {
-    userName:{
+    username:{
         type:String,
         unique: true,
         required: true
@@ -8,13 +9,13 @@ module.exports.schemas = {
         type: String,
         unique: true
     },
-    firstName:{
+    firstname:{
         type: String,
-        required: true
+        
     },
-    lastName:{
+    lastname:{
         type: String,
-        required: true
+    
     },
     password:{
         type:String,

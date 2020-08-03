@@ -24,11 +24,15 @@ app.use(passport.session());
 
 
 // configure routes--------start
+
  const userRouter = require('./routes/userRoute');
  app.use(userRouter);
-
+    
  const merchantRouter = require('./routes/merchantRoutes');
  app.use(merchantRouter);
+
+ const adminRouter = require('./routes/adminRoutes');
+ app.use(adminRouter);
 
 
 //  configure routes----------------end

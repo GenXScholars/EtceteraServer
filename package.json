@@ -4,8 +4,9 @@
   "description": "Epayment Server",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "mocha --timeout 20000"
+    "start": "node app.js",
+    "dev":"nodemon app.js",
+    "test": "mocha --timeout 20000 --exit"
   },
   "author": "Adjaro Ogaga",
   "license": "ISC",

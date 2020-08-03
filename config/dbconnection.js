@@ -14,18 +14,21 @@ if(process.env.NODE_ENV === 'test'){
         console.log(err);
     });
     
-}
+} else{
+  
+    //db  connection for development
 
-//db  connection for development
 
-
-     connection = mongoose.connect(params.MONGO_URI, () => { },  params.MONGO_OPTIONS )
+    connection = mongoose.connect(params.MONGO_URI, () => { },  params.MONGO_OPTIONS )
     .then(() =>{
         console.log('db connected');
     })
         .catch(err => {
             console.log(err);
         });
+}
+
+
 
 
 module.exports = connection;
