@@ -5,12 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev":"nodemon app.js",
+    "dev": "nodemon app.js",
     "test": "mocha --timeout 20000 --exit"
   },
   "author": "Adjaro Ogaga",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
