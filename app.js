@@ -34,6 +34,8 @@ app.use(passport.session());
  const adminRouter = require('./routes/adminRoutes');
  app.use(adminRouter);
 
+ const walletRouter = require('./routes/walletRoutes');
+ app.use(walletRouter);
 
 //  configure routes----------------end
 

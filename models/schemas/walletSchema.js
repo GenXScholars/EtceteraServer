@@ -1,12 +1,24 @@
 module.exports.schemas = {
+    walletOwner:{
+       type:String,
+       required:true
+    },
+    walletPin:{
+        type:String
+    },
+    walletPassword:{
+        type:String
+    },
+    phoneNumber:{
+        type:String,
+        required:true
+    },
     availableBalance:{
         type: String,
         required: true,
     },
-    merchant : [
-        {type: mongoose.Schema.Types.ObjectId,ref:'Merchant'}
-    ],
-    users : [
-        {type: mongoose.Schema.Types.ObjectId,ref:'User'}
-    ]
+      accountName:{
+          type:String,
+          required:true
+      }            
 }

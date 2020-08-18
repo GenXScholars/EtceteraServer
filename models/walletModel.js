@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongose.Schema;
+const Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
 const tables = require('./schemas/walletSchema');
