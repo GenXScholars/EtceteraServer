@@ -1,7 +1,5 @@
 const expressJwt = require('express-jwt');
 const userService = require('../services/userServices');
-const merchant = require('../services/merchantServices');
-const admin = require('../services/adminServices');
 const jwtSecret = require('../config/constants');
 const merchantServices = require('../services/merchantServices');
 const adminServices = require('../services/adminServices');

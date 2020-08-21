@@ -17,35 +17,24 @@ const paths = require('./paths/walletApiPaths');
 //     }
 //   }
 // }
-const WalletServices = require('../services/walletServices');
+const WalletControllers = require('../controllers/wallet');
 const errorHandler = require('../_helpers/errorhandler');
 
 // configure cors
 var cors = require('cors');
 
 
-router.post(paths.createWallet, WalletServices.creatWallet);
-router.post(paths.generateAcctNumber, WalletServices.generateAcctNumber);
-router.post(paths.verifyBvn, WalletServices.verifyBvn);
-router.post(paths.creditWallet, WalletServices.creditWallet);
-router.post(paths.debitWallet, WalletServices.chargeWallet);
-router.post(paths.getWalletBalance, WalletServices.getWalletBalance);
-router.post(paths.setPasswordForWallet, WalletServices.setWalletPassword);
-router.post(paths.setPinForWallet, WalletServices.setWalletPin);
-router.post(paths.getWalletTransactions, WalletServices.getWalletTransactions);
-router.post(paths.transferFromWalletToBank, WalletServices.transferFromWalletToBank);
-router.post(paths.getAWallet, WalletServices.getAWalletById);
-
-
-
-
-
-
-
-
-
-
-
+router.post(paths.createWallet, WalletControllers.create);
+router.post(paths.generateAcctNumber, WalletControllers.getAcctNum);
+router.post(paths.verifyBvn, WalletControllers.verifyBVN);
+router.post(paths.creditWallet, WalletControllers.creditWallet);
+router.post(paths.debitWallet, WalletControllers.chargeWallet);
+router.post(paths.getWalletBalance, WalletControllers.getWalletBalance);
+router.post(paths.setPasswordForWallet, WalletControllers.setWalletPassword);
+router.post(paths.setPinForWallet, WalletControllers.setWalletPin);
+router.post(paths.getWalletTransactions, WalletControllers.getWalletTransactions);
+router.post(paths.transferFromWalletToBank, WalletControllers.transferFromWalletToBank);
+router.post(paths.getAWallet, WalletControllers.getWalletByid);
 
 
 module.exports = router;
