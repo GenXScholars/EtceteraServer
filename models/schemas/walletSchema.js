@@ -20,5 +20,9 @@ module.exports.schemas = {
       accountName:{
           type:String,
           required:true
-      }            
+      },
+      accountNumber:{
+          type:String,
+          required:true
+      }          
 }
