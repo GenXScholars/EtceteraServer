@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Merchant = require('../models/merchantModel');
 require('../auth/userPassport')
+const omitPassword = require("../_helpers/helperFuncs").omitPassword;
 
 
 
@@ -25,12 +26,14 @@ async function  merchantLogin(req, res, next){
        console.log(res);
        if(result){
               //merchant password in the token so we pick only the email and id
-      const body = { _id : merchant._id, username : merchant.username };
+      const body = { _id : merchant._id };
       //Sign the JWT token and populate the payload with the merchant email and id
       const token = jwt.sign({ merchant : body }, config.SECRET);
       //Send back the token to the merchant
+
+       
        res.status(200).json({
-          merchant,
+          merchant: omitPassword(merchant._doc),
           token
          })
        } 

@@ -39,7 +39,7 @@ describe("Admins", () => {
   /*
    * Test the /POST route
    */
-  describe("/POST  register admin", () => {
+  describe("/POST  register an admin", () => {
     it("it should register an admin", (done) => {
       const newAdmin = {
         username: "admin",

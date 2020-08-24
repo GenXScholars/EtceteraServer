@@ -1,9 +1,11 @@
-const config = require('../config/constants');
-const userService = require('../services/userServices');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const User = require('../models/userModel');
-require('../auth/userPassport')
+const config = require("../config/constants");
+const userService = require("../services/userServices");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const User = require("../models/userModel");
+const Token = require("../models/jwtModel");
+require("../auth/userPassport");
+const omitPassword = require("../_helpers/helperFuncs").omitPassword;
 
 
 
@@ -14,24 +16,36 @@ async function  userLogin(req, res, next){
     let password = req.body.password;
     console.log("password" + req.body.password);
     console.log("username" + req.body.username);
+    console.log("ipAddress" + " " + req.ip);
+
     if(!username || !password){
        res.status(404).json({
            message: "username or password cannot be empty"
        })
     }
-    const user = await User.findOne({username});
-    console.log(user);
-    if(user){
-     bcrypt.compare(password, user.password).then((result) => {
+    const dbuser = await User.findOne({username});
+    
+    console.log(dbuser);
+    if(dbuser){
+     bcrypt.compare(password, dbuser.password).then((result) => {
          console.log("result"+ "is" + result )
        if(result){
               //user password in the token so we pick only the email and id
-      const body = { _id : user._id, username : user.username };
+      const body = { _id : dbuser._id};
       //Sign the JWT token and populate the payload with the user email and id
-      const token = jwt.sign({ user : body }, config.SECRET);
+      const token = jwt.sign({ user : body }, config.SECRET, { expiresIn: 60 });
+    //   store jwt in db for reference
+    //     Token.create({
+    //        token: token,
+    //        user: req.body.username,
+    //        expired:false
+    //    }, function(err, token){
+    //        if(err)  next(err);
+    //    })
+
       //Send back the token to the user
        res.status(200).json({
-          user,
+           user:omitPassword(dbuser._doc),
           token
          })
        } 
@@ -105,8 +119,6 @@ function _delete(req, res, next) {
 //        })
 //     }
 // } 
-
-
 
 module.exports = {
     userLogin,

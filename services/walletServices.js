@@ -52,7 +52,7 @@ async function creatWallet(passedBodyParams) {
 }
 
 async function verifyBvn(passedBodyParams) {
-    return await axiosCall.post(`self/verifybvn`, {
+    return await axiosCall.post(`/wallet/verifybvn`, {
       "secretKey": "hfucj5jatq8h",
       "bvn": passedBodyParams.BVN,
       "dateOfBirth":passedBodyParams.DOB // format "14-04-1992",
@@ -134,12 +134,12 @@ async function chargeWallet(passedBodyParams) {
 async function transferFromWalletToBank(passedBodyParams) {
     return axiosCall.post(`/transfer/bank/account`, {
       "SecretKey": "hfucj5jatq8h",
-      "BankCode": req.body.BankCode,
-      "AccountNumber": req.body.AccountNumber,
-      "AccountName": req.body.AccountName,
+      "BankCode": passedBodyParams.BankCode,
+      "AccountNumber": passedBodyParams.AccountNumber,
+      "AccountName": passedBodyParams.AccountName,
       "TransactionReference": Math.floor(Math.random() * 5565566),
-      "Amount": req.body.Amount,
-      "Narration": req.body.Narration
+      "Amount": passedBodyParams.Amount,
+      "Narration": passedBodyParams.Narration
     })
 }
 

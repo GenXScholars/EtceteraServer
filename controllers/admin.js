@@ -3,6 +3,7 @@ const adminService = require('../services/adminServices');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Admin = require('../models/adminModel');
+const omitPassword = require("../_helpers/helperFuncs").omitPassword;
 
 
 
@@ -22,12 +23,12 @@ async function  adminLogin(req, res, next){
          console.log(result);
        if(result){
               //admin password in the token so we pick only the email and id
-      const body = { _id : admin._id, username : admin.username };
+      const body = { _id : admin._id };
       //Sign the JWT token and populate the payload with the admin email and id
       const token = jwt.sign({ admin : body }, config.SECRET);
       //Send back the token to the admin
        res.status(200).json({
-          admin,
+          admin:omitPassword(admin._doc),
           token
          })
        } 

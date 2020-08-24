@@ -33,5 +33,5 @@ module.exports = Object.freeze({
         // replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
       },
     // jwt constants
-    SECRET:'mysecret',
+    SECRET:'ab03adae4e9ea7ae73110599f87481a714c455735dcce96ae50432db4a6d540ee9b7d12c4c527c11f643a0edbfccf97fb282a8bc6bae86978cdb076d388d5787',
 })

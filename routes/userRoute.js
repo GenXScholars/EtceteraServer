@@ -26,6 +26,9 @@ var cors = require('cors');
 router.post(paths.userSignUp, UserController.register);
 router.post(paths.userLogin, UserController.userLogin);
 router.get(paths.getAllUsers, UserController.getAll);
+router.get(paths.getCurrentUser, UserController.getCurrent);
+router.put(paths.updateUser, UserController.update);
+
 
 
 module.exports = router;
