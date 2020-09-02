@@ -6,23 +6,27 @@ module.exports.schemas = {
     walletPin:{
         type:String
     },
+    walletEmail: {
+       type: String,
+       unique: true
+    },
     walletPassword:{
         type:String
     },
     phoneNumber:{
         type:String,
+        unique: true,
         required:true
     },
-    availableBalance:{
+    walletBalance:{
         type: String,
         required: true,
     },
-      accountName:{
+    bankAccountNumber:{
           type:String,
           required:true
       },
-      accountNumber:{
+      bvn:{
           type:String,
-          required:true
       }          
 }

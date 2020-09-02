@@ -8,9 +8,6 @@ require("../auth/userPassport");
 const omitPassword = require("../_helpers/helperFuncs").omitPassword;
 
 
-
-
-
 async function  userLogin(req, res, next){
     let username = req.body.username;
     let password = req.body.password;
@@ -33,7 +30,7 @@ async function  userLogin(req, res, next){
               //user password in the token so we pick only the email and id
       const body = { _id : dbuser._id};
       //Sign the JWT token and populate the payload with the user email and id
-      const token = jwt.sign({ user : body }, config.SECRET, { expiresIn: 60 });
+      const token = jwt.sign({ user : body }, config.SECRET);
     //   store jwt in db for reference
     //     Token.create({
     //        token: token,
@@ -68,6 +65,7 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
+    console.log( "user tokenized" + " " + req.headers)
     userService.getAll()
         .then(users => res.json(users))
         .catch(err => next(err));

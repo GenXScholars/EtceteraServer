@@ -1,14 +1,15 @@
 module.exports =
 {
-    'createWallet':'/api/wallet/create',
-    'generateAcctNumber':'/api/generateAccount/wallet',
-    'setPinForWallet':'/api/wallet/setPin',
-    'setPasswordForWallet':'/api/wallet/setPassword',
-    'getWalletTransactions':'/api/wallet/transactions',
-    'getAWallet': '/api/wallet/getUser',
-    'getWalletBalance':'/api/wallet/balance',
-    'transferFromWalletToBank':'/api/walletToBank/transfer',
-    'creditWallet':'/api/credit/wallet',
-    'debitWallet':'/api/debit/wallet',
-     'verifyBvn':'api/wallet/verifyBvn',
+    "createWallet":"/api/v1/wallet/create",
+    "setPinForWallet":"/api/v1/wallet/setPin",
+    "setPasswordForWallet":"/api/v1/wallet/setPassword",
+    "getWalletTransactions":"/api/v1/wallet/transactions",
+    "getAWallet":"/api/v1/wallet/getUser",
+    "getWalletBalance":"/api/v1/wallet/get-balance",
+    "transferFromWalletToBank":"/api/v1/wallet/TransferToBank",
+    "creditWallet":"/api/v1/wallet/credit",
+    "debitWallet":"/api/v1/wallet/debit",
+     "verifyBvn":"/api/v1/wallet/verifyBvn",
+     "getAllWallets":"/api/v1/wallet/getAll",
+     "getAllWalletsFromDB":"/api/v1/wallet/getFromDB"
 }

@@ -1,4 +1,4 @@
 module.export = {
-    'dstvRecharge': '/api/dstv',
-    'gotv':'/api/gotv',
+    'dstvRecharge': '/api/v1/dstv/recharge',
+    'gotv':'/api/gotv/v1/recharge',
 }

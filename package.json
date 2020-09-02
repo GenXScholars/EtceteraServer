@@ -23,7 +23,9 @@
     "mongoose-unique-validator": "^2.0.3",
     "nodemailer": "^6.4.11",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
