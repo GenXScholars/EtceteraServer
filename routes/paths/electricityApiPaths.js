@@ -1,3 +1,4 @@
 module.exports ={
-    'electricityRecharge': '/api/eltricBills',
+    'BEDCRecharge': '/api/v1/bedc/recharge',
+    'EKORecharge': '/api/v1/eko/recharge',
 }

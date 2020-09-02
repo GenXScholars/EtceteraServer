@@ -81,8 +81,6 @@ async function create(userParam) {
                             email:userParam.email
                             }, function(err, user){
                         if(err) throw err; 
-                       
-
                     });
                 });
             });

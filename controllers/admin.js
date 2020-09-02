@@ -25,7 +25,7 @@ async function  adminLogin(req, res, next){
               //admin password in the token so we pick only the email and id
       const body = { _id : admin._id };
       //Sign the JWT token and populate the payload with the admin email and id
-      const token = jwt.sign({ admin : body }, config.SECRET);
+      const token = jwt.sign({ admin : body }, config.SECRET, { expiresIn: 60 });
       //Send back the token to the admin
        res.status(200).json({
           admin:omitPassword(admin._doc),

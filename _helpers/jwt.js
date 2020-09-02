@@ -1,30 +1,41 @@
-const expressJwt = require('express-jwt');
-const userService = require('../services/userServices');
-const jwtSecret = require('../config/constants');
-const merchantServices = require('../services/merchantServices');
-const adminServices = require('../services/adminServices');
+const expressJwt = require("express-jwt");
+const JWT = require("jsonwebtoken");
+const userService = require("../services/userServices");
+const jwtSecret = require("../config/constants");
+const merchantServices = require("../services/merchantServices");
+const adminServices = require("../services/adminServices");
 
 
 
 function jwt() {
     const secret = jwtSecret.SECRET;
-    return expressJwt({ secret, algorithms: ['HS256'], isRevoked }).unless({
+    return expressJwt({
+        secret,  algorithms: ["HS256"],
+        // credentialsRequired: false,
+        getToken: function fromHeaderOrQuerystring (req) {
+          if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
+              return req.headers.authorization.split(" ")[1];
+          } else if (req.query && req.query.token) {
+            return req.query.token;
+          }
+          return null;
+        }
+      }).unless({
         path: [
             // public routes that don't require authentication
-            '/',
-            '/api/admins',
-            '/api/admin-signUp',
-            '/api/admin-login',
-            '/api/user-signUp',
-            '/api/merchant-signUp',
-            '/api/user-login',
-            '/api/merchant-login',
-            '/api/wallet/create', // to be removed and accessed only by auth users
-            '/api/users', // to br removed and acessed only when authenticated
-            '/api/merchants', // to be removed and acessed only via authentication
-            '/api/self/users' // to be removed from and accessed via tokens
+            "/",
+            "/api/v1/admin/sign-up",
+            "/api/v1/admin/login",
+            "/api/v1/user/sign-up",
+            "/api/v1/merchant/sign-up",
+            "/api/v1/user/login",
+            "/api/v1/merchant/login",
+            "/api-docs", 
+           "/api/v1/wallet/create", // to be removed and accesd only via authentication
+            "/api/v1/wallet/verifyBvn"
         ]
     });
+    
 }
 
 async function isRevoked(req, payload, done) {

@@ -1,4 +1,4 @@
 module.exports ={
-    'getAllcreditCards':'/api/creditCards',
-    'getSingleCreditCards': '/api/creditCards/:id',
+    'getAllcreditCards':'/api/v1/creditCard/get-all',
+    'getSingleCreditCards': '/api/v1/creditCards/:id',
 }

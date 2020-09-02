@@ -5,8 +5,8 @@ async function sendCreditTransaction(reqBody){
     const  transporter = await nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "devmail236@gmail.com", // custom domain
-          pass: "test1234>", // mail password
+          user: "adjaro.ogaga@gmail.com", // custom domain
+          pass: "1986LORDo", // mail password
         },
       });
       const mailConfig = {
@@ -18,7 +18,7 @@ async function sendCreditTransaction(reqBody){
         <p>Bellow are the details of the credit transaction </p>
         <p>wallet holder: ${reqBody.password}</p>
         <p>Amount Credited: ${reqBody.amount}</p>
-        <p>WalletBalance: ${reqBody.availableBalance}</p>
+        <p>WalletBalance: ${reqBody.RecipientWalletBalance}</p>
         `
       };
 

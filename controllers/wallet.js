@@ -1,12 +1,11 @@
-const config = require('../config/constants');
-const walletService = require('../services/walletServices');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const config = require("../config/constants");
+const walletService = require("../services/walletServices");
+const sendCreditAlert = require("../services/notifications/transactionMail");
 const Wallet = require("../models/walletModel");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
     create,
-    getAcctNum,
     verifyBVN,
     creditWallet,
     chargeWallet,
@@ -15,33 +14,48 @@ module.exports = {
     setWalletPassword,
     getWalletTransactions,
     transferFromWalletToBank,
-    getWalletByid
+    getWalletByid,
+    getAllCreatedWallets,
+    getAllCreatedWalletsFromDB
 }
 
-function create(req, res, next){
+ function create(req, res, next){
     console.log(req.body)
-   walletService.creatWallet(req.body).then((result)=>{       
-       res.json({
-           message : ` your wallet was created succesffully`,
-           result
-       })
+   walletService.creatWallet(req.body).then((result)=>{   
+       console.log(result.data)  
+       const walletInfo = result.data.Data;  
+       console.log("phone number" + " " + walletInfo.PhoneNumber);
+       console.log("email" + " " + walletInfo.Email);
+       console.log("Available Balance" + " " + walletInfo.AvailableBalance);
+       console.log("BVN" + " " + walletInfo.BVN);
+    //  change the null value of bvn from wallet Africa
+    //    const bvn =  walletInfo.BVN === null ? "" : walletInfo.BVN;
+
+    // check if wallet already exists
+       if (Wallet.findOne({ bankAccountNumber: walletInfo.bankAccountNumber })) {
+        throw "you have a wallet already, please check your wallet";
+    }
+       const wallet = Wallet.create(
+        {
+            walletOwner: walletInfo.AccountName,
+            walletPin: walletInfo.walletPin || "no pin set",
+            walletEmail: walletInfo.Email,
+            wqlletPassword: walletInfo.Passoword || "No password set",
+            phoneNumber: walletInfo.PhoneNumber,
+            walletBalance: walletInfo.AvailableBalance,
+            bankAccountNumber: walletInfo.AccountNo
+            }, function(err, wallet){
+        if(err) throw(err); 
+        sendMailForWalletCreation.notifyWalletCreation(walletInfo);
+        res.json({
+            message : ` your wallet was created succesffully`,
+            wallet
+        }) 
+    }); 
    })
    .catch((err)=>{
        next(err)
    })
-}
-
-function getAcctNum(req, res, next){
-    walletService.generateAcctNumber(req.body)
-    .then((result)=>{
-        res.json({
-            message:`succcesfully genarated account number .....`,
-            result
-        })
-    })
-    .catch((err)=>{
-        next(err)
-    })
 }
 
 function verifyBVN(req, res, next){
@@ -56,9 +70,11 @@ function verifyBVN(req, res, next){
 function creditWallet(req, res, next){
     walletService.creditWallet(req.body)
     .then((result)=> {
+        const data = result.data.Data;
+        sendCreditTransaction
         res.json({
             message:`wallet credited with ...... succesfully`,
-            result
+            data
         })
     }).catch(err => next(err))
 }
@@ -124,7 +140,7 @@ function transferFromWalletToBank(req, res, next){
 }
 
 
-function getWalletByid(){
+function getWalletByid(req, res, next){
     walletService.getAWalletById(req.body)
     .then((result) => {
         res.json({
@@ -132,4 +148,29 @@ function getWalletByid(){
             result
         })
     }).catch(err => next(err))
+}
+
+// to retrieve all wallets from local db
+
+async function getAllCreatedWalletsFromDB(req, res, next) {
+     walletService.getAllWalletsFromDatabase()
+           .then((result) =>{
+             res.json({
+                 message: `Wallets retrieved succesfully`,
+                 result
+             })
+         }
+         ).catch(err => next(err))
+}
+function getAllCreatedWallets(req, res, next){
+    walletService.getAllWallets(req.body)
+    .then((result) => {
+        const data = result.data.Data;
+        res.json({
+            message: `all wallets retrieved`,
+            data
+        })
+    }
+
+    ).catch(err => next(err))
 }
