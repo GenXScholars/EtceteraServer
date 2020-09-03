@@ -43,6 +43,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
  const walletRouter = require("./routes/walletRoutes");
  app.use(walletRouter);
 
+ const cardRouter = require("./routes/cardsRoutes");
+ app.use(cardRouter);
+
 //  configure routes----------------end
 
 
