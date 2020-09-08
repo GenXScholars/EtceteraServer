@@ -30,9 +30,7 @@ function jwt() {
             "/api/v1/merchant/sign-up",
             "/api/v1/user/login",
             "/api/v1/merchant/login",
-            "/api-docs", 
-           "/api/v1/wallet/create", // to be removed and accesd only via authentication
-            "/api/v1/wallet/verifyBvn"
+            "/api-docs"
         ]
     });
     

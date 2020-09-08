@@ -25,7 +25,7 @@ var cors = require('cors');
 
 router.post(paths.creatACreditCard, CreditCardsController.create);
 router.get(paths.getSingleCreditCards, CreditCardsController.getByCardId);
-router.post(paths.getAllcreditCards, CreditCardsController.getAllCreditCards);
+router.get(paths.getAllCreditCards, CreditCardsController.getAllCreditCards);
 router.patch(paths.updateCreditCard, CreditCardsController.updateCardInfo);
 router.post(paths.deleteACreditCard, CreditCardsController.deleteCard);
 

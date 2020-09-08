@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const paths = require('./paths/paths');
+const paths = require('./paths/adminPaths');
 
 
 // to be added for multiple api calls

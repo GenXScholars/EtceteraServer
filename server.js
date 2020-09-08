@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
+// security
 const cors = require("cors");
-const passport = require("passport");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
@@ -12,6 +15,15 @@ const errorHandler = require("./_helpers/errorhandler");
 const config = require("./config/constants");
  require("./config/dbconnection");
  
+// security config
+
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 15 minutes
+  max: 50 // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
+app.use(helmet());
 
 // middleware configurations 
 app.use(morgan("dev"));
@@ -73,7 +85,8 @@ var options = {
       customJs: "/custom.js",
     }
   }
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 // configure api-docs ------------ends
 

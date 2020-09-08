@@ -19,8 +19,8 @@ async function createNewCard(passedBodyParams){
     })
 }
 
-async function getByCardId(id){
-    return await User.findById(id);
+async function getByCardId(cardNumber){
+    return await Cards.findById(cardNumber);
 }
 
 async function getAllCards() {

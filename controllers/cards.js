@@ -12,17 +12,17 @@ const cardsServices = require("../services/creditCardsServices");
 }
 
  function getByCardId(req, res, next){
-     cardsServices.getByCardId(req.body)
+     cardsServices.getByCardId(req.params.cardNumber)
      .then((card) => {
          res.json({
-             message:`Card with card name ${req.body.CardHoldername} was retrieved`,
+             message:`Card with card name ${card.NameOnCard} was retrieved`,
              card
          })
      }).catch(err => next(err))
  }
 
  function getAllCreditCards(req, res, next){
-     cardsServices.getAllCards(req.body)
+     cardsServices.getAllCards()
      .then((cards)=> {
         res.json({
             message:`All credit cards retrieved succesfully`,
@@ -32,7 +32,7 @@ const cardsServices = require("../services/creditCardsServices");
  }
 
  function updateCardInfo(req, res, next){
-    cardsServices.updateCard(req.body)
+    cardsServices.updateCard(req.params.id, req.body)
     .then((card)=> {
        res.json({
            message:`Credit card updated succesfully`
@@ -41,10 +41,11 @@ const cardsServices = require("../services/creditCardsServices");
 }
 
 function deleteCard(req, res, next){
-    cardsServices._delete(req.body)
+    cardsServices._delete(req.params.id)
     .then((card)=> {
        res.json({
-           message:`Credit card with card name ${req.body.CardHoldername} was deleted`
+           message:`Credit card with card name ${card.CardHoldername} was deleted`,
+           card
        })
     }).catch(err => next(err))
 }

@@ -5,7 +5,7 @@ const  User  = require('../models/userModel');
 
 module.exports = {
     getAll,
-    getById,
+    getSingleUser,
     create,
     update,
     delete: _delete
@@ -41,8 +41,8 @@ async function getAll() {
     return await User.find();
 }
 
-async function getById(id) {
-    return await User.findById(id);
+async function getSingleUser(id) {
+    return await User.find(id);
 }
 
 async function create(userParam) {
