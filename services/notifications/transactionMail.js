@@ -63,7 +63,34 @@ async function sendDebitTransaction(){
       });
 }
 
-
+async function sendTransferToBankTransaction(){
+  const  transporter = await nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "devmail236@gmail.com", // custom domain
+        pass: "test1234>", // mail password
+      },
+    });
+    const mailConfig = {
+      from: 'devmail236@gmail.com',
+      to: 'lordoadjaro@gmail.com', // to be changed to user.email
+      subject: 'YOUR WALLET WAS CREDITED',
+      html: `
+      <h1>Dear ${user.username}</h1>
+      <p>Bellow are the details of the debit transaction </p>
+      <p>wallet holder: ${reqBody.password}</p>
+      <p>Amount Debited: ${reqBody.amount}</p>
+      <p>WalletBalance: ${reqBody.availableBalance}</p>
+      `
+    };
+     return transporter.sendMail(mailConfig, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+}
 
 module.exports = {
   sendCreditTransaction,

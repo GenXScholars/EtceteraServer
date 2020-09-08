@@ -1,8 +1,9 @@
 const config = require("../config/constants");
 const walletService = require("../services/walletServices");
-const sendCreditAlert = require("../services/notifications/transactionMail");
+const transactions = require("../services/notifications/transactionMail");
 const Wallet = require("../models/walletModel");
 const bcrypt = require("bcryptjs");
+const walletCreationNotifications = require("../services/notifications/walletCreationNotifications");
 
 module.exports = {
     create,
@@ -46,7 +47,7 @@ module.exports = {
             bankAccountNumber: walletInfo.AccountNo
             }, function(err, wallet){
         if(err) throw(err); 
-        sendMailForWalletCreation.notifyWalletCreation(walletInfo);
+        // sendMailForWalletCreation.notifyWalletCreation(walletInfo);
         res.json({
             message : ` your wallet was created succesffully`,
             wallet
@@ -71,7 +72,7 @@ function creditWallet(req, res, next){
     walletService.creditWallet(req.body)
     .then((result)=> {
         const data = result.data.Data;
-        sendCreditTransaction
+        // transactions.sendCreditTransaction(data);
         res.json({
             message:`wallet credited with ...... succesfully`,
             data
@@ -82,9 +83,11 @@ function creditWallet(req, res, next){
 function chargeWallet(req, res, next){
     walletService.chargeWallet(req.body)
     .then((result)=>{
+        const data = result.data.Data;
+        // transactions.sendDebitTransaction(data);
         res.json({
             message:`wallet charge succesfuly`,
-            result
+            data
         })
     }).catch(err => next(err))
 }
@@ -102,6 +105,8 @@ function getWalletBalance(req, res, next){
 function setWalletPin(req, res, next){
     walletService.setWalletPin(req.body)
     .then((result)=>{
+        const data = result.data.Data;
+        walletCreationNotifications.notifyWalletPinSet(data);
         res.json({
             message:`wallet pin set succesfully`,
             result
@@ -112,6 +117,8 @@ function setWalletPin(req, res, next){
 function setWalletPassword(req, res, next){
     walletService.setWalletPassword(req.body)
     .then((result)=>{
+        const data = result.data.Data;
+        // walletCreationNotifications.notifyWalletPasswordSet(data);
         res.json({
             message: `wallet password set succesfully`,
             result

@@ -12,12 +12,12 @@ module.exports.schemas = {
         type: String,
         required: true,
     },
-    cardHolderName:{
+    NameOnCard:{
         type: String,
         required: true
     },
     cardType:{
-        type:Image,
+        type:String,
         required: true
     },
     cardFlag:{

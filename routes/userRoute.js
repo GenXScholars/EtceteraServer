@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const paths = require('./paths/paths');
+const paths = require('./paths/usersPaths');
 
 
 // to be added for multiple api calls
@@ -18,14 +18,11 @@ const paths = require('./paths/paths');
 //   }
 // }
 const UserController = require('../controllers/user');
-const errorHandler = require('../_helpers/errorhandler');
-
-// configure cors
-var cors = require('cors');
 
 router.post(paths.userSignUp, UserController.register);
 router.post(paths.userLogin, UserController.userLogin);
 router.get(paths.getAllUsers, UserController.getAll);
+router.get(paths.getSingleUser, UserController.getById);
 router.get(paths.getCurrentUser, UserController.getCurrent);
 router.put(paths.updateUser, UserController.update);
 

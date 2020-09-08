@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const paths = require('./paths/adminPaths');
+const paths = require('./paths/creditCardsApiPaths');
 
 
 // to be added for multiple api calls
@@ -17,18 +17,17 @@ const paths = require('./paths/adminPaths');
 //     }
 //   }
 // }
-const AdminController = require('../controllers/admin');
+const CreditCardsController = require('../controllers/cards');
 const errorHandler = require('../_helpers/errorhandler');
 
 // configure cors
 var cors = require('cors');
 
-router.post(paths.adminSignUp, AdminController.register);
-router.post(paths.adminLogin, AdminController.adminLogin);
-router.patch(paths.updateAdmin, AdminController.update);
-router.post(paths.getSingleAdmin, AdminController.getById);
-router.get(paths.getAllAdmins, AdminController.getAll);
-router.delete(paths.deleteAdmin, AdminController.delete);
+router.post(paths.creatACreditCard, CreditCardsController.create);
+router.get(paths.getSingleCreditCards, CreditCardsController.getByCardId);
+router.get(paths.getAllCreditCards, CreditCardsController.getAllCreditCards);
+router.patch(paths.updateCreditCard, CreditCardsController.updateCardInfo);
+router.post(paths.deleteACreditCard, CreditCardsController.deleteCard);
 
 
 
