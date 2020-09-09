@@ -90,8 +90,6 @@ var options = {
 
 // configure api-docs ------------ends
 
-app.listen(config.PORT, ()=>{
-    console.log("server running on port" + " " + config.PORT)
-})
+app.listen( process.env.PORT || 3000);
 
 module.exports = app;
