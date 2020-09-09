@@ -10,4 +10,6 @@ COPY . .
 
 RUN rm -rf src/
 
+EXPOSE 8080
+
 CMD [ "node", "server.js" ]
