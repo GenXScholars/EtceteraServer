@@ -8,6 +8,6 @@ steps:
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
-  args: ['run', 'deploy', 'vinebillcloud', '--image', 'gcr.io/vinebillbackend/vinebillcloud', '--region', 'REGION', '--platform', 'managed', '--allow-unauthenticated']
+  args: ['run', 'deploy', 'vinebillcloud', '--image', 'gcr.io/vinebillbackend/vinebillcloud', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 images:
 - gcr.io/vinebillbackend/vinebillcloud
