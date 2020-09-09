@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN rm -rf src/
+
 EXPOSE 8080
 
-CMD [ "node", "app.js" ]
+CMD [ "node", "server.js" ]
