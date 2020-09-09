@@ -90,6 +90,6 @@ var options = {
 
 // configure api-docs ------------ends
 
-app.listen( process.env.PORT || 8080);
+app.listen( config.PORT );
 
 module.exports = app;
