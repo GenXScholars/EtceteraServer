@@ -14,6 +14,7 @@ const jwt = require("./_helpers/jwt");
 const errorHandler = require("./_helpers/errorhandler");
 const config = require("./config/constants");
  require("./config/dbconnection");
+ const router = require('express').Router();
  
 // security config
 
@@ -75,7 +76,7 @@ app.use(errorHandler);
 
 app.use("/", (req, res, next)=> {
     res.status(200).json({
-        message: "welcome to vinebill api"
+        message: "the oficial api of vineBill app"
     })
 })
 // configure api-docs ----------starts
@@ -85,11 +86,13 @@ var options = {
       customJs: "/custom.js",
     }
   }
-
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+  router.use('/api-docs', swaggerUi.serve);
+  router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 // configure api-docs ------------ends
 
-app.listen( config.PORT );
+app.listen( config.PORT, ()=>{
+  console.log("server running on port" + " " + config.PORT)
+} );
 
 module.exports = app;
