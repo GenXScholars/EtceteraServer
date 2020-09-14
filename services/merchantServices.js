@@ -3,14 +3,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const  Merchant  = require('../models/merchantModel');
 
-module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    delete: _delete
-};
-
 
 async function getAll() {
     return await Merchant.find();
@@ -88,3 +80,11 @@ async function update(id, newMerchant) {
 async function _delete(id) {
     await Merchant.findByIdAndRemove(id);
 }
+
+module.exports = {
+    getAll,
+    getById,
+    create,
+    update,
+    delete: _delete
+};

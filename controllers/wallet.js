@@ -5,20 +5,6 @@ const Wallet = require("../models/walletModel");
 const bcrypt = require("bcryptjs");
 const walletCreationNotifications = require("../services/notifications/walletCreationNotifications");
 
-module.exports = {
-    create,
-    verifyBVN,
-    creditWallet,
-    chargeWallet,
-    getWalletBalance,
-    setWalletPin,
-    setWalletPassword,
-    getWalletTransactions,
-    transferFromWalletToBank,
-    getWalletByid,
-    getAllCreatedWallets,
-    getAllCreatedWalletsFromDB
-}
 
  function create(req, res, next){
     console.log(req.body)
@@ -157,18 +143,6 @@ function getWalletByid(req, res, next){
     }).catch(err => next(err))
 }
 
-// to retrieve all wallets from local db
-
-async function getAllCreatedWalletsFromDB(req, res, next) {
-     walletService.getAllWalletsFromDatabase()
-           .then((result) =>{
-             res.json({
-                 message: `Wallets retrieved succesfully`,
-                 result
-             })
-         }
-         ).catch(err => next(err))
-}
 function getAllCreatedWallets(req, res, next){
     walletService.getAllWallets(req.body)
     .then((result) => {
@@ -180,4 +154,18 @@ function getAllCreatedWallets(req, res, next){
     }
 
     ).catch(err => next(err))
+}
+
+module.exports = {
+    create,
+    verifyBVN,
+    creditWallet,
+    chargeWallet,
+    getWalletBalance,
+    setWalletPin,
+    setWalletPassword,
+    getWalletTransactions,
+    transferFromWalletToBank,
+    getWalletByid,
+    getAllCreatedWallets
 }

@@ -3,14 +3,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const  Admin  = require('../models/adminModel');
 
-module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    delete: _delete
-};
-
 async function getAll() {
     return await Admin.find();
 }
@@ -87,3 +79,12 @@ async function update(id, newAdmin) {
 async function _delete(id) {
     await Admin.findByIdAndRemove(id);
 }
+
+
+module.exports = {
+    getAll,
+    getById,
+    create,
+    update,
+    delete: _delete
+};

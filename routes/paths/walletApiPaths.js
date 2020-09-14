@@ -10,6 +10,5 @@ module.exports =
     "creditWallet":"/api/v1/wallet/credit",
     "debitWallet":"/api/v1/wallet/debit",
      "verifyBvn":"/api/v1/wallet/verifyBvn",
-     "getAllWallets":"/api/v1/wallet/getAll",
-     "getAllWalletsFromDB":"/api/v1/wallet/getFromDB"
+     "getAllWallets":"/api/v1/wallet/getAll"
 }

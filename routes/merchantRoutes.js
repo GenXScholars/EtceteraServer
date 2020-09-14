@@ -23,11 +23,11 @@ const errorHandler = require('../_helpers/errorhandler');
 // configure cors
 var cors = require('cors');
 
+router.get(paths.getSingleMerchant, MerchantController.getById);
+router.get(paths.getAllMerchants, MerchantController.getAll);
 router.post(paths.merchantSignUp, MerchantController.register);
 router.post(paths.merchantLogin, MerchantController.merchantLogin);
-router.patch(paths.updateMerchant, MerchantController.update);
-router.post(paths.getSingleMerchant, MerchantController.getById);
-router.get(paths.getAllMerchants, MerchantController.getAll);
+router.put(paths.updateMerchant, MerchantController.update);
 router.delete(paths.deleteMerchant, MerchantController.delete);
 router.post(paths.getCurrentMerchant, MerchantController.getCurrent);
 
