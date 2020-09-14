@@ -24,10 +24,10 @@ const errorHandler = require('../_helpers/errorhandler');
 var cors = require('cors');
 
 router.post(paths.creatACreditCard, CreditCardsController.create);
-router.get(paths.getSingleCreditCards, CreditCardsController.getByCardId);
 router.get(paths.getAllCreditCards, CreditCardsController.getAllCreditCards);
-router.patch(paths.updateCreditCard, CreditCardsController.updateCardInfo);
-router.post(paths.deleteACreditCard, CreditCardsController.deleteCard);
+router.get(paths.getSingleCreditCards, CreditCardsController.getByCardId);9
+router.put(paths.updateCreditCard, CreditCardsController.updateCardInfo);
+router.delete(paths.deleteACreditCard, CreditCardsController.deleteCard);
 
 
 

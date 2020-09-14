@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const paths = require('./paths/adminPaths');
+const paths = require('./paths/walletsInDbPaths');
 
 
 // to be added for multiple api calls
@@ -17,19 +15,15 @@ const paths = require('./paths/adminPaths');
 //     }
 //   }
 // }
-const AdminController = require('../controllers/admin');
+const WalletControllers = require('../controllers/walletsInDB');
 const errorHandler = require('../_helpers/errorhandler');
 
 // configure cors
 var cors = require('cors');
 
-router.get(paths.getSingleAdmin, AdminController.getById);
-router.get(paths.getAllAdmins, AdminController.getAll);
-router.post(paths.adminSignUp, AdminController.register);
-router.post(paths.adminLogin, AdminController.adminLogin);
-router.put(paths.updateAdmin, AdminController.update);
-router.delete(paths.deleteAdmin, AdminController.delete);
-
-
+router.get(paths.getAllWalletsFromDB, WalletControllers.getAllWalletsFromDB);
+router.get(paths.getAWalletById, WalletControllers.getWalletInDBByid);
+router.get(paths.getAWalletBalance, WalletControllers.getWalletBalanceInDB);
+router.delete(paths.deleteAWallet, WalletControllers.deleteAWallet);
 
 module.exports = router;

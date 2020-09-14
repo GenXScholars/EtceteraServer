@@ -42,7 +42,7 @@ async function getAll() {
 }
 
 async function getSingleUser(id) {
-    return await User.find(id);
+    return await User.findById(id);
 }
 
 async function create(userParam) {

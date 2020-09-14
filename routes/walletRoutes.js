@@ -34,9 +34,7 @@ router.post(paths.setPinForWallet, WalletControllers.setWalletPin);
 router.post(paths.getWalletTransactions, WalletControllers.getWalletTransactions);
 router.post(paths.transferFromWalletToBank, WalletControllers.transferFromWalletToBank);
 router.post(paths.getAWallet, WalletControllers.getWalletByid);
-router.post(paths.getAllWallets, WalletControllers.getAllCreatedWallets);
-router.get(paths.getAllWalletsFromDB, WalletControllers.getAllCreatedWalletsFromDB);
-
+router.get(paths.getAllWallets, WalletControllers.getAllCreatedWallets);
 
 
 module.exports = router;

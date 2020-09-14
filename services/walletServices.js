@@ -3,21 +3,6 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/constants");
 const Wallet = require("../models/walletModel");
 const apiUrl = "https://sandbox.wallets.africa"; // to be changed for production
-module.exports = {
-  creatWallet,
-  verifyBvn,
-  setWalletPin,
-  setWalletPassword,
-  getWalletTransactions,
-  getAWalletById,
-  getWalletBalance,
-  getAllWallets,
-  getAllWalletsFromDatabase,
-  chargeWallet,
-  creditWallet,
-  transferFromWalletToBank,
-  // delete: _delete
-};
 
 //axios config
 const publickey = "uvjqzm5xl6bw";
@@ -266,7 +251,7 @@ async function transferFromWalletToBank(passedBodyParams) {
     throw "Amount to be transferred is missing"
   }
 
-  if(tyepof(passedBodyParams.Amount) === -Infinity){
+  if(Math.sign(passedBodyParams.Amount) === -1){
     throw "you must enter a positive number"
   }
 
@@ -308,3 +293,18 @@ async function creditWallet(passedBodyParams) {
   }
     
 }
+
+module.exports = {
+  creatWallet,
+  verifyBvn,
+  setWalletPin,
+  setWalletPassword,
+  getWalletTransactions,
+  getAWalletById,
+  getWalletBalance,
+  getAllWallets,
+  getAllWalletsFromDatabase,
+  chargeWallet,
+  creditWallet,
+  transferFromWalletToBank
+};
