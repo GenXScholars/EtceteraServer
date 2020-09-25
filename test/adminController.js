@@ -7,7 +7,7 @@ let Admin = require("../models/adminModel");
 var assert = require("assert");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let server = require("../app");
+let server = require("../server");
 let should = chai.should();
 
 chai.use(chaiHttp);
@@ -25,7 +25,7 @@ describe("Admins", () => {
   describe("/GET all admins", () => {
     it("it should GET all the admins", (done) => {
         chai.request(server)
-        .get("/api/admins")
+        .get("/api/v1/admin/get-all")
         .end((err, res) => {
           if (err) done(err);
           res.should.have.status(200);
@@ -47,7 +47,7 @@ describe("Admins", () => {
         email: "admin@gmail.com",
       };
       chai.request(server)
-        .post("/api/admin-signUp;")
+        .post("/api/v1/admin/sign-up")
         .send(newAdmin)
         .end((err, res) => {
           res.should.have.status(200);

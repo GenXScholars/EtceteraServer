@@ -7,7 +7,7 @@ let Merchant = require("../models/merchantModel");
 var assert = require("assert");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let server = require("../app");
+let server = require("../server");
 let should = chai.should();
 
 chai.use(chaiHttp);
@@ -25,7 +25,7 @@ describe("Merchants", () => {
   describe("/GET all merchants", () => {
     it("it should GET all the merchants", (done) => {
         chai.request(server)
-        .get("/api/merchants")
+        .get("/api/v1/merchant/get-all")
         .end((err, res) => {
           if (err) done(err);
           res.should.have.status(200);
@@ -47,7 +47,7 @@ describe("Merchants", () => {
         email: "merchant@gmail.com",
       };
       chai.request(server)
-        .post("/api/merchant-signUp")
+        .post("/api/v1/merchant/sign-up")
         .send(newMerchant)
         .end((err, res) => {
           res.should.have.status(200);

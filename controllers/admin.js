@@ -10,8 +10,8 @@ const omitPassword = require("../_helpers/helperFuncs").omitPassword;
 async function  adminLogin(req, res, next){
     let username = req.body.username;
     let password = req.body.password;
-    console.log("password" + req.body.password);
-    console.log("username" + req.body.username);
+    debug("password" + req.body.password);
+    debug("username" + req.body.username);
     if(!username || !password){
        res.status(404).json({
            message: "username or password cannot be empty"
@@ -20,10 +20,10 @@ async function  adminLogin(req, res, next){
     const admin = await Admin.findOne({username});
     if(admin){
      bcrypt.compare(password, admin.password).then((result) => {
-         console.log(result);
+         debug(result);
        if(result){
               //admin password in the token so we pick only the email and id
-      const body = { _id : admin._id };
+      const body = { _id : admin._id, role: "admin" };
       //Sign the JWT token and populate the payload with the admin email and id
       const token = jwt.sign({ admin : body }, config.SECRET, { expiresIn: 60 });
       //Send back the token to the admin

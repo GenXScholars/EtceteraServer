@@ -1,4 +1,5 @@
 const config = require("../config/constants");
+const debug = require("debug")("app:UserControllers");
 const userService = require("../services/userServices");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -25,10 +26,10 @@ async function  userLogin(req, res, next){
     console.log(dbuser);
     if(dbuser){
      bcrypt.compare(password, dbuser.password).then((result) => {
-         console.log("result"+ "is" + result )
+         debug("result"+ "is" + result )
        if(result){
               //user password in the token so we pick only the email and id
-      const body = { _id : dbuser._id};
+      const body = { _id : dbuser._id, role:"user"};
       //Sign the JWT token and populate the payload with the user email and id
       const token = jwt.sign({ user : body }, config.SECRET);
     //   store jwt in db for reference

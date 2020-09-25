@@ -235,7 +235,7 @@ async function creditWallet(passedBodyParams) {
   if(!passedBodyParams.amount){
     throw "you must enter a valid amount"
   }
-  if(typeof(passedBodyParams.amount) === -Infinity){
+  if(Math.sign(passedBodyParams.amount) === -1){
     throw "you cannit enter a negative number"
   }
   if(!passedBodyParams.phoneNumber){

@@ -34,4 +34,7 @@ module.exports = Object.freeze({
       },
     // jwt constants
     SECRET:'ab03adae4e9ea7ae73110599f87481a714c455735dcce96ae50432db4a6d540ee9b7d12c4c527c11f643a0edbfccf97fb282a8bc6bae86978cdb076d388d5787',
+    FlutterwavePubicKey :"FLWPUBK-7adb6177bd71dd43c2efa3f1229e3b7f-X",
+    FlutterWaveSecretKey : "FLWSECK-327b3874ca8e75640a1198a1b75c0b0b-X"
+
 })
