@@ -7,7 +7,7 @@ let User = require('../models/userModel');
 var assert = require('assert');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../app');
+let server = require('../server');
 let should = chai.should();
 
 
@@ -26,7 +26,7 @@ describe('Users', () => {
   describe('/GET all users', () => {
       it('it should GET all the users', (done) => {
         chai.request(server)
-            .get('/api/users')
+            .get('/api/v1/user/get-all')
             .end((err, res) => {
               if (err) done(err);
                   res.should.have.status(200);
@@ -49,7 +49,7 @@ describe('/POST  register user', () => {
              email: "o@gmail.com"
          }  
             chai.request(server)
-            .post('/api/user-signUp')
+            .post('/api/v1/user/sign-up')
             .send(newUser)
             .end((err, res) => {
                   res.should.have.status(200);
@@ -60,14 +60,8 @@ describe('/POST  register user', () => {
                     // res.body.book.should.have.property('email');
                 done();
             });
-        
-       
-     
     });
-
-});
-
-
+ });
 });
 
 

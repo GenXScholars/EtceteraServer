@@ -80,6 +80,10 @@ app.use(compression())
  const resultCheckerRouter = require("./routes/resultCheckerRoutes");
  app.use(resultCheckerRouter);
 
+
+ const fundByCardRouter = require("./routes/fundWalletByCardRoutes");
+ app.use(fundByCardRouter);
+
 //  configure routes----------------end
 
 

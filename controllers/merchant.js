@@ -26,7 +26,7 @@ async function  merchantLogin(req, res, next){
        console.log(res);
        if(result){
               //merchant password in the token so we pick only the email and id
-      const body = { _id : merchant._id };
+      const body = { _id : merchant._id, role: "merchant" };
       //Sign the JWT token and populate the payload with the merchant email and id
       const token = jwt.sign({ merchant : body }, config.SECRET, { expiresIn: 60 });
       //Send back the token to the merchant
