@@ -19,9 +19,8 @@ const axiosCall = axios.create({
 function  initiateFundingByCard(req, res, next){
     walletFundByCardService.initiateCardFunding(req.body)
     .then((result) => {
-       
-        debug(result);
         result += result.toString();
+        debug(result);
         res.json({
             message: `funding wallet by card initiated`,
             result
@@ -34,6 +33,7 @@ function validateNigerianCards(req, res, next){
     .then((result) => {
         // const currency = result.data.currency;
         // const amount = result.data.amount;
+        debug(result);
 
         debug(result)
         res.json({

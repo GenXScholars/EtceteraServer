@@ -2,19 +2,19 @@ const forge    = require("node-forge");
 const axios = require('axios').default;
 const md5 = require('md5');
 
+//  axios config
 
-var options = {
-    url: "",  // live URL: https://api.ravepay.co    to be added for production
-    method: "",
+const axiosCall = axios.create({
+    baseURL: "https://api.ravepay.co/flwv3-pug/getpaidx/api",
     headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    },
-    body: {
+        'Accept': 'application/json'  
+    }
+  });
+let options = {
         "PBFPubKey": "",  // merchant public key goes here
         "alg": "3DES-24",
         client: "",
-    }
 }
 
  class Rave {
@@ -52,12 +52,10 @@ var options = {
     async initiatePayment(card_details) {
             let encrypted_card_details = this.encryptCardDetails(card_details);
             let payment_options = Object.assign({}, options);
-            payment_options.url = 'https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/charge';
-            payment_options.body.client = encrypted_card_details;
+            payment_options.client = encrypted_card_details;
             payment_options.method = 'POST';
-            payment_options.body.PBFPubKey = this.public_key; // set public key
-
-        return  await axios.create({payment_options});
+            payment_options.PBFPubKey = this.public_key; // set public key
+        return  await axiosCall.post("/charge", {payment_options});
     }
 }
 
