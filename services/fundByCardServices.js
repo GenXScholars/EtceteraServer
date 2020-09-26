@@ -2,21 +2,21 @@ const debug = require("debug");
 const Wallet = require("../models/walletModel");
 const axios = require("axios").default;
 
+//import secret/publickeys
 
-//merchant secret and publickeys
-const PubicKey = "FLWPUBK-7adb6177bd71dd43c2efa3f1229e3b7f-X";
-const SecretKey = "FLWSECK-327b3874ca8e75640a1198a1b75c0b0b-X";
+const SecretKey = require("../config/constants").FlutterWaveSecretKey;
+const PubicKey = require("../config/constants").FlutterwavePubicKey;
 
    // params for test 
-   let flightID = "123949494DC";
-   cardno ="5399670123490229" ;
-   cvv = "123";
-   expirymonth = "1";
-   expiryyear = "21";
-   currency = "NGN";
-   amount = "50";
+   let flightID = "";
+   cardno ="" ;
+   cvv = "";
+   expirymonth = "";
+   expiryyear = "";
+   currency = "";
+   amount = "";
    country = "";
-   phonenumber ="07033002245";
+   phonenumber ="";
    email = "user@flw.com";
    firstname = "Ogaga";
    lastname = "Adjaro";
@@ -46,7 +46,7 @@ const rave = new Rave(PubicKey, SecretKey);
 
 async function initiateCardFunding(passedBodyParams) {
    //validate input parameters
-  if(passedBodyParams){
+  
     // get a hold of the body params
     // const { cardno, cvv, expirymonth, expiryyear, currency, country, amount, email, phonenumber, firstname, lastname, IP  } = passedBodyParams;
  
@@ -69,7 +69,7 @@ async function initiateCardFunding(passedBodyParams) {
         "redirect_url": "https://rave-webhook.herokuapp.com/receivepayment",
         "device_fingerprint": "69e6b7f0b72037aa8428b70fbe03986c"
       });
-  }
+  
 }
 
 async function validateCardsWithPins(passedBodyParams){
@@ -149,7 +149,6 @@ return  await axios.create({passedBodyParams});
 }
 
 async function verifyPayment(passedBodyParams){
-  if(results.status === "success" && results.txt.currency === passedBodyParams.currency){
     const apiUrl = "https://api.ravepay.co/flwv3-pug/getpaidx/api/v2";  // production endpoint
      const axiosVerify = axios.create({
         baseURL: apiUrl,
@@ -159,14 +158,14 @@ async function verifyPayment(passedBodyParams){
         }
       });
     return await axiosVerify.post("/verify", {
-        "txref":results.data.txref, // transact refrence from innitiate payment
-        "SECKEY":"FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X" // merchant secret key
+        "txref":"MC-" + Date.now(), // transact refrence from innitiate payment
+        "SECKEY":SecretKey // merchant secret key
       })  
-  }
+
 }
 module.exports = {
     initiateCardFunding,
-    validateCardsWithPins,           //*  one of these endpoints       */
+    validateCardsWithPins,           //*  only one of these endpoints       */
     validateInternatinalCards,       //*    will be reached            */
     validatePayment,
     verifyPayment
