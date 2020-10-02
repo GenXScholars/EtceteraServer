@@ -23,5 +23,9 @@ module.exports.schemas = {
     cardFlag:{
         type: String,
         required: false
-    }
+    },
+    cardsPassword:{
+        type: String,
+        required: true
+    },
 }

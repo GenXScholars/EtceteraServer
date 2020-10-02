@@ -1,4 +1,6 @@
+const debug = require("debug")("app:WalletSERVICES");
 const axios = require("axios").default;
+const User = require("../models/userModel");
 const Wallet = require("../models/walletModel");
 const apiUrl = "https://sandbox.wallets.africa"; // to be changed for production
 
@@ -7,13 +9,15 @@ const publickey = "uvjqzm5xl6bw";
 const axiosCall = axios.create({
   baseURL: apiUrl,
   headers: {
-    Authorization: `Bearer ${publickey}`,  
+    Authorization: `Bearer ${publickey}`,
+    'Content-Type':'application/json'  
   }
 });
 
 
 
-async function creatWallet(passedBodyParams) {
+async function creatWallet(passedBodyParams, res, next) {
+  let dbWallet;
   if(!passedBodyParams.firstname){
     throw "firstname is required";
   }
@@ -28,14 +32,62 @@ async function creatWallet(passedBodyParams) {
   }
   if(passedBodyParams) {
     const { firstname, lastname, email, DOB, currency } = passedBodyParams;
-     return await axiosCall.post(`/wallet/generate`, {
-      "firstName": firstname,
-      "lastName": lastname,
-      "email": email,
-      "SecretKey": "hfucj5jatq8h",
-      "dateOfBirth": DOB,
-      "currency": currency,
-    })
+     // check if wallet already exists
+     Wallet.find({}, async function(err, wallets){
+       if(err) throw error;
+       debug(wallets);
+       for(wallet in wallets){
+        if(wallets[wallet].phoneNumber === passedBodyParams.phoneNumber){
+          throw "You already have a wallet , please check your wallet";
+        }
+       }
+        await axiosCall.post(`/wallet/generate`, {
+          firstName: firstname,
+          lastName: lastname,
+          email: email,
+          SecretKey: "hfucj5jatq8h",
+          dateOfBirth: DOB,
+          currency: currency,
+        }).then( async (result) => {
+               debug("axios result " + " " + result);
+               
+              //  const bvn =  walletInfo.BVN === null ? "" : walletInfo.BVN;
+               const walletInfo = result.data.Data;
+               debug(walletInfo);
+            await Wallet.create(
+            {
+                walletOwner: walletInfo.AccountName,
+                walletPin: walletInfo.walletPin || "no pin set",
+                walletEmail: walletInfo.Email,
+                wqlletPassword: walletInfo.Password || "No password set",
+                phoneNumber: walletInfo.PhoneNumber,
+                walletBalance: walletInfo.AvailableBalance,
+                bankAccountNumber: walletInfo.AccountNo
+                }).then( async (wallet)=>{
+                  dbWallet = wallet;
+                  debug("walletEmail" + " " + walletInfo.Email)
+
+                  //find the owne of the wallet
+                   await User.findOne({email: walletInfo.Email}) .then((user)=> {
+                  //if found set the wallet field to the user id for association 
+                   debug("USER" + " " + user);
+                      dbWallet.wallet = user.id;
+                    }).catch(err => next(err))
+                  // User.findOne({email: walletInfo.Email}).populate('wallet').
+                  // exec(function (err, wallet) {
+                  // if (err) next(err);
+                  // debug(wallet + " " + "was added to uer");
+                  // });
+                  debug("dbWallet" + " " + wallet);
+                }).catch(err => next(err))
+                debug(wallet);
+                return  res.status(200).json({
+               message: `wallet created succesfully`,
+               walletInfo
+           })
+                  
+        }).catch(err => next(err))
+     })
   }
 }
 
@@ -43,21 +95,20 @@ async function verifyBvn(passedBodyParams) {
   // if(!passedBodyParams.BVN && (passedBodyParams.BVN.length != 10)){
   //   throw "you must enter a valid bvn"
   // }
-  if(!passedBodyParams){
     const { BVN, DOB } = passedBodyParams;
     return await axiosCall.post(`/wallet/verifybvn`, {
 
       // the below is for testing the api endpoit
-      "dateOfBirth": "14-04-1992",
-      "bvn": "22231485915",
-      "phoneNumber": "08057998539",
-      "secretKey": "hfucj5jatq8h"      
+      dateOfBirth: "14-04-1992",
+      bvn: "22231485915",
+      phoneNumber: "08057998539",
+      secretKey: "hfucj5jatq8h"      
       //  code below for production standard
       // "secretKey": "hfucj5jatq8h",
       // "bvn": BVN,
       // "dateOfBirth": DOB // format "14-04-1992",
     })
-  }
+  
 }
 // to retrieve wallest stored in local db
 
@@ -70,7 +121,7 @@ async function getAllWallets(passedBodyParams) {
   // }
     const secretekey = passedBodyParams.secret;
     return await axiosCall.post(`/self/users`, {
-      "secretKey": "hfucj5jatq8h",
+      secretKey: "hfucj5jatq8h",
     }) 
 }
 // async function generateAcctNumber(passedBodyParams) {
@@ -94,8 +145,8 @@ async function setWalletPin(passedBodyParams) {
   if(passedBodyParams){
     const { phoneNumber, transactionPin } = passedBodyParams;
     return await axiosCall.post(`/wallet/pin`, {
-      "phoneNumber": phoneNumber,
-      "transactionPin": transactionPin,
+      phoneNumber: phoneNumber,
+      transactionPin: transactionPin,
       secretKey: "hfucj5jatq8h",
     })
   }
@@ -111,9 +162,9 @@ async function setWalletPassword(passedBodyParams) {
   if(passedBodyParams){
      const { phoneNumber, password } = passedBodyParams;
     return await axiosCall.post(`/wallet/password`, {
-      "phoneNumber": phoneNumber,
-      "password": password,
-      "secretKey": "hfucj5jatq8h",
+      phoneNumber: phoneNumber,
+      password: password,
+      secretKey: "hfucj5jatq8h",
     })
    }
 }
@@ -131,15 +182,15 @@ async function getWalletTransactions(passedBodyParams) {
   if(passedBodyParams){
     const { skip, take, dateFrom, dateTO, transactionType, phoneNumber, transactionPin, currency } = passedBodyParams;
     return await axiosCasll.post(`/wallet/transactions`, {
-      "skip": skip, // type of number
-      "take": take, // type of number
-      "dateFrom": dateFrom,  // date format "2020-01-15",
-      "dateTo": dateTO, // date format"2020-01-15",
-      "transactionType": transactionType, // mustbe of type number
-      "phoneNumber": phoneNumber,
-      "transactionPin": transactionPin,
-      "currency": currency,
-      "secretKey": "hfucj5jatq8h",
+      skip: skip, // type of number
+      take: take, // type of number
+      dateFrom: dateFrom,  // date format "2020-01-15",
+      dateTo: dateTO, // date format"2020-01-15",
+      transactionType: transactionType, // mustbe of type number
+      phoneNumber: phoneNumber,
+      transactionPin: transactionPin,
+      currency: currency,
+      secretKey: "hfucj5jatq8h",
     })
   }
 }
@@ -151,16 +202,16 @@ async function getAWalletById(passedBodyParams) {
   if(passedBodyParams){
     const { phoneNumber } = passedBodyParams;
     return await axiosCall.post(`/wallet/getuser`, {
-      "phoneNumber": phoneNumber ,
-      "secretKey": "hfucj5jatq8h",
+      phoneNumber: phoneNumber ,
+      secretKey: "hfucj5jatq8h",
     })
   }
 }
 
 async function getWalletBalance(passedBodyParams) {
-  if(!passedBodyParams.phoneNumber){
-    throw "you must enter a phone number "
-  }
+  // if(!!!passedBodyParams.phoneNumber){
+  //   throw "you must enter a phone number "
+  // }
   if(!passedBodyParams.transactionPin){
     throw "you must enter a transaction pin "
   }
@@ -173,17 +224,17 @@ async function getWalletBalance(passedBodyParams) {
   if(passedBodyParams){
     const { phoneNumber, transactionPin, currency } = passedBodyParams;
     return await axiosCall.post(`/wallet/balance`, {
-      "phoneNumber": phoneNumber,
-      "transactionPin": transactionPin ,
-      "currency": currency,
-      "secretKey": "hfucj5jatq8h",
+      phoneNumber: phoneNumber,
+      transactionPin: transactionPin ,
+      currency: currency,
+      secretKey: "hfucj5jatq8h",
     })
   } 
 }
 
 // transfer api
 async function chargeWallet(passedBodyParams) {
-  if(!passedBodyParams.amount && (typeof(amount) == -Infinity)){
+  if(!passedBodyParams.amount || (Math.sign(!!passedBodyParams) === -1)){
     throw " you must enter a valid amount "
   }
   if(!passedBodyParams.phoneNumber){
@@ -191,9 +242,9 @@ async function chargeWallet(passedBodyParams) {
   }
   if(passedBodyParams){
     return axiosCall.post(`/wallet/debit`, {
-      "transactionReference": Math.floor(Math.random() * 5566), //temporary id ..to be dynamic
-      "amount": passedBodyParams.amount,
-      "phoneNumber": passedBodyParams.phoneNumber,
+      "transactionReference": "2716707355", //temporary id ..to be dynamic
+      "amount": "200.0",
+      "phoneNumber": "08057998539",
       "secretKey": "hfucj5jatq8h", // this is constant
     })
   } 
@@ -220,13 +271,13 @@ async function transferFromWalletToBank(passedBodyParams) {
   if(passedBodyParams){
     const { BankCode, AccountNumber, AccountName, Amount, Narration } = passedBodyParams;
     return axiosCall.post(`/transfer/bank/account`, {
-      "SecretKey": "hfucj5jatq8h",
-      "BankCode": BankCode,
-      "AccountNumber": AccountNumber,
-      "AccountName": AccountName,
-      "TransactionReference": Math.floor(Math.random() * 5565566),
-      "Amount": Amount,
-      "Narration": Narration
+      SecretKey: "hfucj5jatq8h",
+      BankCode: BankCode,
+      AccountNumber: AccountNumber,
+      AccountName: AccountName,
+      TransactionReference: Math.floor(Math.random() * 5565566),
+      Amount: Amount,
+      Narration: Narration
     })
   } 
 }
@@ -244,10 +295,10 @@ async function creditWallet(passedBodyParams) {
   if(passedBodyParams){
     const { amount, phoneNumber } = passedBodyParams;
     return await axiosCall.post(`/wallet/credit`, {
-      "transactionReference":Math.floor(Math.random() * 5565566),
-      "amount": amount,
-      "phoneNumber": phoneNumber,
-      "secretKey": "hfucj5jatq8h"
+      transactionReference:Math.floor(Math.random() * 5565566),
+      amount: amount,
+      phoneNumber: phoneNumber,
+      secretKey: "hfucj5jatq8h"
     })
   }    
 }

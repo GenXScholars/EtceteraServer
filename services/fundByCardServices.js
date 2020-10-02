@@ -8,19 +8,20 @@ const SecretKey = require("../config/constants").FlutterWaveSecretKey;
 const PubicKey = require("../config/constants").FlutterwavePubicKey;
 
    // params for test 
-   let flightID = "";
-   cardno ="" ;
-   cvv = "";
-   expirymonth = "";
-   expiryyear = "";
-   currency = "";
-   amount = "";
+   let flightID = "123949494DC";
+   cardno ="5438898014560229" ;
+   cvv = "564";
+   expirymonth = "10";
+   expiryyear = "31";
+   currency = "NGN";
+   amount = "100";
    country = "";
    phonenumber ="";
    email = "user@flw.com";
    firstname = "Ogaga";
    lastname = "Adjaro";
    IP = "rdyfxcfucxfyucfyh";
+   tnxf = "MC-3243e";
 
 
 // axios config for  verify endpoint
@@ -51,6 +52,7 @@ async function initiateCardFunding(passedBodyParams) {
     // const { cardno, cvv, expirymonth, expiryyear, currency, country, amount, email, phonenumber, firstname, lastname, IP  } = passedBodyParams;
  
     return await rave.initiatePayment({
+      
         "PBFPubKey": PubicKey, //merchant pub key
         "cardno": cardno,
         "cvv": cvv,

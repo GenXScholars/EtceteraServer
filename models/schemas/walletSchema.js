@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 module.exports.schemas = {
     walletOwner:{
        type:String,
@@ -26,7 +28,13 @@ module.exports.schemas = {
           type:String,
           required:true
       },
-      bvn:{
+    bvn:{
           type:String,
-      }          
+      },
+      user:
+        [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }]
+             
 }

@@ -38,9 +38,9 @@ module.exports.schemas = {
             ref:'Merchant'
         },
     wallet :
-        {
+        [{
             type: mongoose.Schema.Types.ObjectId,
             ref:'Wallet'
-        }
+        }]
     
 }

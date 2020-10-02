@@ -1,3 +1,4 @@
+var parseString = require('xml2js').parseString;
 const config = require("../config/constants");
 const IBEDCService = require("../services/EEDCServices");
 const transactions = require("../services/notifications/transactionMail");
@@ -8,6 +9,9 @@ function getAccountDetails(req, res, next){
     .then((result)=>{
         const data = result.data.Data;
         // transactions.sendDebitTransaction(data);
+        parseString(xml, function (err, result) {
+            console.dir(result);
+        });
         res.json({
             message:`your details was retrieved succesfully`,
             data

@@ -17,9 +17,9 @@ const axiosCall = axios.create({
 });
 
 function  initiateFundingByCard(req, res, next){
+    debug("I got here");
     walletFundByCardService.initiateCardFunding(req.body)
     .then((result) => {
-        result += result.toString();
         debug(result);
         res.json({
             message: `funding wallet by card initiated`,

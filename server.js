@@ -84,6 +84,20 @@ app.use(compression())
  const fundByCardRouter = require("./routes/fundWalletByCardRoutes");
  app.use(fundByCardRouter);
 
+
+//  airtime and data routes
+
+const airtimeRouter = require("./routes/airtime_ng_Routes");
+app.use(airtimeRouter);
+
+const mtnDataRouter = require("./routes/mtndataRechargeRoutes");
+app.use(mtnDataRouter);
+
+// dstv route
+
+const dstvRouter = require("./routes/dstvRoutes");
+app.use(dstvRouter);
+
 //  configure routes----------------end
 
 
