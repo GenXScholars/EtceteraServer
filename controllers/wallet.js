@@ -1,3 +1,4 @@
+const debug = require("debug")("app:WALLETS");
 const config = require("../config/constants");
 const walletService = require("../services/walletServices");
 const transactions = require("../services/notifications/transactionMail");
@@ -6,50 +7,45 @@ const bcrypt = require("bcryptjs");
 const walletCreationNotifications = require("../services/notifications/walletCreationNotifications");
 
 
- function create(req, res, next){
-    console.log(req.body)
-   walletService.creatWallet(req.body).then((result)=>{   
-       console.log(result.data)  
-       const walletInfo = result.data.Data;  
-       console.log("phone number" + " " + walletInfo.PhoneNumber);
-       console.log("email" + " " + walletInfo.Email);
-       console.log("Available Balance" + " " + walletInfo.AvailableBalance);
-       console.log("BVN" + " " + walletInfo.BVN);
+ async function create(req, res, next){
+   walletService.creatWallet(req.body,res, next)
+   .then((info)=> {
+        debug(info);
+   }).catch(err => next(err))
+    // debug("Data" + " " + wallet);
+    //    const walletInfo = result.data.Data;  
+    //    debug("phone number" + " " + walletInfo.PhoneNumber);
+    //    debug("email" + " " + walletInfo.Email);
+    //    debug("Available Balance" + " " + walletInfo.AvailableBalance);
+    //    debug("BVN" + " " + walletInfo.BVN);
     //  change the null value of bvn from wallet Africa
-    //    const bvn =  walletInfo.BVN === null ? "" : walletInfo.BVN;
+      
 
-    // check if wallet already exists
-       if (Wallet.findOne({ bankAccountNumber: walletInfo.bankAccountNumber })) {
-        throw "you have a wallet already, please check your wallet";
-    }
-       const wallet = Wallet.create(
-        {
-            walletOwner: walletInfo.AccountName,
-            walletPin: walletInfo.walletPin || "no pin set",
-            walletEmail: walletInfo.Email,
-            wqlletPassword: walletInfo.Passoword || "No password set",
-            phoneNumber: walletInfo.PhoneNumber,
-            walletBalance: walletInfo.AvailableBalance,
-            bankAccountNumber: walletInfo.AccountNo
-            }, function(err, wallet){
-        if(err) throw(err); 
-        // sendMailForWalletCreation.notifyWalletCreation(walletInfo);
-        res.json({
-            message : ` your wallet was created succesffully`,
-            wallet
-        }) 
-    }); 
-   })
-   .catch((err)=>{
-       next(err)
-   })
+//      Wallet.create(
+//         {
+//             walletOwner: walletInfo.AccountName,
+//             walletPin: walletInfo.walletPin || "no pin set",
+//             walletEmail: walletInfo.Email,
+//             wqlletPassword: walletInfo.Passoword || "No password set",
+//             phoneNumber: walletInfo.PhoneNumber,
+//             walletBalance: walletInfo.AvailableBalance,
+//             bankAccountNumber: walletInfo.AccountNo
+//             }, function(err, wallet){
+//         if(err) throw(err); 
+//         // sendMailForWalletCreation.notifyWalletCreation(walletInfo);
+        
+//     }); 
+   
 }
 
 function verifyBVN(req, res, next){
     walletService.verifyBvn(req.body)
-    .then((result)=>{
+    .then((results)=>{
+        // results = JSON.stringify(results);
+        debug("DATA" + " " + results);
          res.json({
-             message: `your bvn was verified succesfully`
+             message: `your bvn was verified succesfully`,
+             results
          })
     }).catch(err => next(err))
 }
@@ -58,6 +54,7 @@ function creditWallet(req, res, next){
     walletService.creditWallet(req.body)
     .then((result)=> {
         const data = result.data.Data;
+        debug(data)
         // transactions.sendCreditTransaction(data);
         res.json({
             message:`wallet credited with ...... succesfully`,
@@ -69,11 +66,12 @@ function creditWallet(req, res, next){
 function chargeWallet(req, res, next){
     walletService.chargeWallet(req.body)
     .then((result)=>{
-        const data = result.data.Data;
+        const data = result.headers;
+        debug("DebitWallet" + " " + result);
         // transactions.sendDebitTransaction(data);
-        res.json({
-            message:`wallet charge succesfuly`,
-            data
+        return res.json({
+            message:`wallet charged succesfuly`,
+            
         })
     }).catch(err => next(err))
 }

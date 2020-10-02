@@ -113,6 +113,5 @@ module.exports = {
     getDealerBalance,
     FetchUsage,
     PostTransaction_New,
-    FetchTxnByRef,
-    
+    FetchTxnByRef
 };

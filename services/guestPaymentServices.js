@@ -59,14 +59,12 @@ async function initiateGuestPayment(passedBodyParams) {
   }
 }
 
-async function verifyGuestPayment(results, req){
-  if(results.status === "success" && results.txt.currency === req.body.currency){
-    
+async function verifyGuestPayment(results, req){  
     return await axiosVerify.post("/verify", {
         "txref":results.data.txref, // transact refrence from innitiate payment
         "SECKEY":SecKEY // merchant secret key
       })  
-  }
+  
 }
 module.exports = {
     initiateGuestPayment,

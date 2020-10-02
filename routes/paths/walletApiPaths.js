@@ -9,6 +9,6 @@ module.exports =
     "transferFromWalletToBank":"/api/v1/wallet/TransferToBank",
     "creditWallet":"/api/v1/wallet/credit",
     "debitWallet":"/api/v1/wallet/debit",
-     "verifyBvn":"/api/v1/wallet/verifyBvn",
-     "getAllWallets":"/api/v1/wallet/getAll"
+    "verifyBvn":"/api/v1/wallet/verifyBvn",
+    "getAllWallets":"/api/v1/wallet/getAll"
 }
