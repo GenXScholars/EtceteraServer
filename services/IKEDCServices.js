@@ -1,5 +1,5 @@
 
-const axios = require("axios").default;
+const axios = require("axios");
 const md5 = require("md5");
 const BillsTransactions = require("../models/billsTransactModels");
 const apiUrl = "http://demoapi.iepins.com.ng/API/vproxy-sub.asmx"; // to be changed for production
@@ -7,12 +7,12 @@ const apiUrl = "http://demoapi.iepins.com.ng/API/vproxy-sub.asmx"; // to be chan
 //axios config
 const ApiKey = "8AACD1B26E8255D709FB6AD0BA5D0C73";
 const dealercode = "IE0167";
-const axiosCall = axios.create({
-  baseURL: apiUrl,
-//   headers: {
-//     Authorization: `Bearer ${publickey}`,  
-//   }
-});
+// const axiosCall = axios.create({
+//   baseURL: apiUrl,
+// //   headers: {
+// //     Authorization: `Bearer ${publickey}`,  
+// //   }
+// });
 
 
 
@@ -74,7 +74,7 @@ async function PostTransaction(passedBodyParams) {
   if(passedBodyParams){
     const { AccountNumber, Ammount, email, AccountType } = passedBodyParams;
     const hashedVals = md5( AccountNumber + dealercode);
-    return await axiosCall.post(`/PostTransaction`, {
+    return await axios.post(`${apiUrl}/PostTransaction`, {
         "AccountNo":  AccountNumber,
         "amount": Ammount,
         "hashstring": hashedVals,
