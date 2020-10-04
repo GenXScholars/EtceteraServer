@@ -7,7 +7,7 @@ let Admin = require("../src/app/models/adminModel");
 var assert = require("assert");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let server = require("../src/server");
+let server = require("../src/app/server");
 let should = chai.should();
 
 chai.use(chaiHttp);

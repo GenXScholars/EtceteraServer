@@ -12,10 +12,10 @@ const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-const jwt = require("./_helpers/jwt");
-const errorHandler = require("./_helpers/errorhandler");
-const config = require("./config/constants");
- require("./config/dbconnection");
+const jwt = require("../_helpers/jwt");
+const errorHandler = require("../_helpers/errorhandler");
+const config = require("../config/constants");
+ require("../config/dbconnection");
 
 
 // security middlewares
@@ -48,57 +48,57 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(compression())
 // configure routes--------start
 
- const userRouter = require("../src/app/users/userRoute");
+ const userRouter = require("./users/userRoute");
  app.use(userRouter);
     
- const merchantRouter = require("../src/app/merchants/merchantRoutes");
+ const merchantRouter = require("./merchants/merchantRoutes");
  app.use(merchantRouter);
 
- const adminRouter = require("../src/app/admin/adminRoutes");
+ const adminRouter = require("./admin/adminRoutes");
  app.use(adminRouter);
 
 //  const walletRouter = require("../src/app/wallet/User");
 //  app.use(walletRouter);
 
- const cardRouter = require("../src/app/credit-cards/cardsRoutes");
+ const cardRouter = require("./credit-cards/cardsRoutes");
  app.use(cardRouter);
 
- const walletInDbRouter = require("../src/app/wallet/User-wallet/wallet-in-Db/walletsInDBRoutes");
+ const walletInDbRouter = require("./wallet/User-wallet/wallet-in-Db/walletsInDBRoutes");
  app.use(walletInDbRouter);
 
 //  bills api routes
- const EEDCRouter = require("../src/app/electricity-bills/EEDC/EEDCRoutes");
+ const EEDCRouter = require("./electricity-bills/EEDC/EEDCRoutes");
  app.use(EEDCRouter);
 
- const EKEDCRouter = require("../src/app/electricity-bills/EKEDC/EKEDCRoutes");
+ const EKEDCRouter = require("./electricity-bills/EKEDC/EKEDCRoutes");
  app.use(EKEDCRouter);
 
- const IBEDCRouter = require("../src/app/electricity-bills/IBEDC/IBEDCRoutes");
+ const IBEDCRouter = require("./electricity-bills/IBEDC/IBEDCRoutes");
  app.use(IBEDCRouter);
 
- const IKEDCRouter = require("../src/app/electricity-bills/IKEDC/IKEDCRoutes");
+ const IKEDCRouter = require("./electricity-bills/IKEDC/IKEDCRoutes");
  app.use(IKEDCRouter);
 
 //  wace, neco and nabteb apis
- const resultCheckerRouter = require("../src/app/result-checker/resultCheckerRoutes");
+ const resultCheckerRouter = require("./result-checker/resultCheckerRoutes");
  app.use(resultCheckerRouter);
 
 
- const fundByCardRouter = require("../src/app/wallet/fund/Card-Flw/fundWalletByCardRoutes");
+ const fundByCardRouter = require("./wallet/fund/Card-Flw/fundWalletByCardRoutes");
  app.use(fundByCardRouter);
 
 
 //  airtime and data routes
 
-const airtimeRouter = require("../src/app/airtime/airtime_ng_Routes");
+const airtimeRouter = require("./airtime/airtime_ng_Routes");
 app.use(airtimeRouter);
 
-const mtnDataRouter = require("../src/app/data/mtn-data/mtndataRechargeRoutes");
+const mtnDataRouter = require("./data/mtn-data/mtndataRechargeRoutes");
 app.use(mtnDataRouter);
 
 // dstv route
 
-const dstvRouter = require("../src/app/cable-tv/DSTV/dstvRoutes");
+const dstvRouter = require("./cable-tv/DSTV/dstvRoutes");
 app.use(dstvRouter);
 
 //  configure routes----------------end
