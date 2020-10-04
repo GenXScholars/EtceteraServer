@@ -12,4 +12,4 @@ RUN rm -rf src/
 
 EXPOSE 8080
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "src/app/server.js" ]
