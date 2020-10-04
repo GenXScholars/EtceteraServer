@@ -11,3 +11,5 @@ steps:
   args: ['run', 'deploy', 'vinebillcloud', '--image', 'gcr.io/vinebillbackend/vinebillcloud', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 images:
 - gcr.io/vinebillbackend/vinebillcloud
+env:
+- 'NODE_ENV=production' 
