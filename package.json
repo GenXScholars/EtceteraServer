@@ -2,10 +2,10 @@
   "name": "epaymentserver",
   "version": "1.0.0",
   "description": "Epayment Server",
-  "main": "app.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "SET DEBUG=app, app* & nodemon server.js",
+    "start": "node src/server.js",
+    "dev": "SET DEBUG=app, app* & nodemon src/server.js",
     "test": "mocha --timeout 20000 --exit"
   },
   "author": "Adjaro Ogaga",
