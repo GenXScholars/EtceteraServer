@@ -124,8 +124,10 @@ var options = {
 
 // configure api-docs ------------ends
 
-app.listen( process.env.PORT || 8080, ()=>{
-  console.log("server running on port" + " " + config.PORT)
+const port = process.env.PORT || 8080;
+
+app.listen( port , ()=>{
+  console.log("server running on port" + " " + port)
 } );
 
 module.exports = app;
