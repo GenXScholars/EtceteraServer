@@ -1,6 +1,6 @@
 module.exports = Object.freeze({
     PROTOCOL: (process.env.NODE_ENV === 'development') ? 'http://' : 'http://',
-    SERVER_NAME : 'localhost:3080/',
+    SERVER_NAME : 'localhost:8080/',
     APP_VERSION : '1.0.0',
     APP_LANGUAGE: 'English',
     APP_NAME: 'Epayment',
@@ -8,7 +8,7 @@ module.exports = Object.freeze({
         name: 'ADJARO OGAGA',
         contact: 'ogagaadjaro@gmail.com'
     },
-    PORT :  process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : (process.env.NODE_ENV === 'test' ? 3030 : 4000),
+    PORT :  process.env.NODE_ENV === 'production' ? (process.env.PORT || 8080) : (process.env.NODE_ENV === 'test' ? 3030 : 4000),
      MONGO_URI : 'mongodb+srv://ogaga:1986LORDo@cluster0-yuz76.azure.mongodb.net/epayment?retryWrites=true&w=majority',
     // MONGO_URI : 'mongodb://localhost/epayment',
     MONGO_OPTIONS : {
