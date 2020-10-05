@@ -16,14 +16,15 @@ const axiosCall = axios.create({
   }
 });
 
-function  initiateFundingByCard(req, res, next){
+async function  initiateFundingByCard(req, res, next){
     debug("I got here");
-    walletFundByCardService.initiateCardFunding(req.body)
-    .then((result) => {
+      const payment = await walletFundByCardService.initiateCardFunding(req.body);
+      debug(payment)
+    payment.then((result) => {
         debug(result);
         res.json({
             message: `funding wallet by card initiated`,
-            result
+            
         })
     }).catch(err => next(err))
 }
@@ -56,7 +57,6 @@ function validateInternationalCards(req, res, next){
             "curreny": currency,
             "amount": amount,
             customer
-
         })
     }).catch(err => next(err))
 }

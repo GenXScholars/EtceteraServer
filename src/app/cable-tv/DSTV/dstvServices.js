@@ -17,9 +17,9 @@ async function rechargeOneTime(passedBodyParams) {
   //   throw "You must enter an amount"
   // }
   const { amount, SmartCardNumber } = passedBodyParams;
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
-    "secret_key": SecretKey,
+    "secret_key": "FLWSECK_TEST-c87625893dd1c07a03fc8162a7e24a06-X",
     "service": "fly_buy",
     "service_method": "post",
     "service_version": "v1",
@@ -38,7 +38,7 @@ async function rechargeOneTime(passedBodyParams) {
 }
 
 async function  rechargeBulk(){
-  return await axiosCall.post("/fly_buy_bulk",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy_bulk",
@@ -83,7 +83,7 @@ async function  rechargeBulk(){
 }
 
 async function  getAllTransactions(){
-  return await axiosCall.post("/fly_history",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_history",
@@ -102,7 +102,7 @@ async function  getAllTransactions(){
 }
 
 async function  getSingleTransaction(){
-  return await axiosCall.post("/fly_history",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_history",
@@ -121,7 +121,7 @@ async function  getSingleTransaction(){
 }
 
 async function getMonthlyRecharge(passedBodyParams) {
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -141,7 +141,7 @@ async function getMonthlyRecharge(passedBodyParams) {
 }
 
 async function getAmountForAProduct(passedBodyParams) {
-  return await axiosCall.post("/fly_remita_biller_lookup_{BillerID}_{ProductID}",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_remita_biller_lookup_BIL136_OT151",
@@ -152,7 +152,7 @@ async function getAmountForAProduct(passedBodyParams) {
 }
 
 async function validate(passedBodyParams) {
-  return await axiosCall.post("/bills_validate_itemcode_billercode_customerid",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "bills_validate_CB140_BIL119_1025401152", // codes to b passed here

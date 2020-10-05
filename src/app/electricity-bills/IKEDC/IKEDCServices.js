@@ -6,12 +6,9 @@ const apiUrl = "http://demoapi.iepins.com.ng/API/vproxy-sub.asmx"; // to be chan
 //axios config
 const ApiKey = "8AACD1B26E8255D709FB6AD0BA5D0C73";
 const dealercode = "IE0167";
-// const axiosCall = axios.create({
-//   baseURL: apiUrl,
-// //   headers: {
-// //     Authorization: `Bearer ${publickey}`,  
-// //   }
-// });
+const axiosCall = axios.create({
+  baseURL: apiUrl,
+});
 
 
 

@@ -13,7 +13,7 @@ const axiosCall = axios.create({
 
 async function getAllAvailableBills(passedBodyParams) {
  
-  return await axiosCall.post(`/`, {
+  return await axiosCall.post("", {
       "secret_key": SecretKey,
       "service": "bills_categories",
       "service_method": "get",
@@ -27,7 +27,7 @@ async function getAllAvailableBills(passedBodyParams) {
 
 async function rechargeOneTimeAirtime(passedBodyParams) {
   const { phoneNumber, refId, Amount, country } = passedBodyParams;
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -49,7 +49,7 @@ async function rechargeOneTimeAirtime(passedBodyParams) {
 
 
 async function  rechargeBulkAirtime(passedBodyParams){
-  return await axiosCall.post("/fly_buy_bulk",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy_bulk",
@@ -94,7 +94,7 @@ async function  rechargeBulkAirtime(passedBodyParams){
 }
 
 async function  getAllRecurringSubscribers(passedBodyParams){
-  return await axiosCall.get("/fly_recurring",
+  return await axiosCall.get("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_recurring",
@@ -109,7 +109,7 @@ async function  getAllRecurringSubscribers(passedBodyParams){
 
 
 async function  getAllTransactions(passedBodyParams){
-  return await axiosCall.post("/fly_history",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_history",
@@ -129,7 +129,7 @@ async function  getAllTransactions(passedBodyParams){
 }
 
 async function  getSingleTransaction(passedBodyParams){
-  return await axiosCall.post("/fly_history",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_history",
@@ -160,7 +160,7 @@ async function  getStatusOfBill(passedBodyParams){
   })
 }
 async function getHourlyRecharge(passedBodyParams) {
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -181,7 +181,7 @@ async function getHourlyRecharge(passedBodyParams) {
  
 }
 async function getDailyRecharge(passedBodyParams) {
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -204,7 +204,7 @@ async function getDailyRecharge(passedBodyParams) {
 }
 
 async function getWeeklyRecharge(passedBodyParams) {
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -227,7 +227,7 @@ async function getWeeklyRecharge(passedBodyParams) {
 }
 
 async function getMonthlyRecharge(passedBodyParams) {
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -249,7 +249,7 @@ async function getMonthlyRecharge(passedBodyParams) {
 }
 
 async function cancelRecurringRecharge(passedBodyParams) {
-  return await axiosCall.post("/fly_recurring_cancel",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_recurring_cancel",
@@ -266,7 +266,7 @@ async function cancelRecurringRecharge(passedBodyParams) {
 }
 
 async function getAmountForAProduct(passedBodyParams) {
-  return await axiosCall.post("/fly_remita_biller_lookup_{BillerID}_{ProductID}",
+  return await axiosCall.post("",
   {
     "secret_key": "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X",
     "service": "fly_remita_biller_lookup_BIL136_OT151",

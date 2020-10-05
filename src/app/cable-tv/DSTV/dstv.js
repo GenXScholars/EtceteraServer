@@ -5,11 +5,14 @@ const debug = require("debug")("app:DSTVControllers");
 function recharge(req, res, next){
     DSTVService.rechargeOneTime(req.body)
     .then((result)=>{
+        debug(result)
         debug("DSTV RECHARGE DATA: " + " "+ result);
-        const data = result.data.Data;
+        const data = result.data;
+        const status = result.statusText
         // transactions.sendDebitTransaction(data);
         res.json({
             message:"you have recharged your dstv succesfully",
+            status,
             data
         })
     }).catch(err => next(err))
@@ -18,10 +21,13 @@ function recharge(req, res, next){
 function  rechargeBulk(req, res, next){
     DSTVService.rechargeBulk(req.body)
     .then((result)=>{
+        const data = result.data;
+        const status = result.statusText
         debug("DSTV BULK DATA :" + " " + result);
         res.json({
             message:"Your bulk recharge waws succesful",
-            result
+            status,
+            data
         })
     }).catch(err => next(err))
 }
@@ -31,9 +37,12 @@ function getSingleTransaction(req, res, next){
       DSTVService.getSingleTransaction(req.body)
     .then((result)=>{
         debug("single transaction DATA" + " " + result);
+        const data = result.data;
+        const status = result.statusText
        res.json({
            message:"Your single transaction data was retrieved succesfully",
-           result
+           status,
+           data
        })
     }).catch(err => next(err))
 }
@@ -42,9 +51,12 @@ function getMonthlyRecharge(req, res, next){
     DSTVService.getMonthlyRecharge(req.body)
     .then((result) => {
         debug("Monthly recharge DATA" + " " + result);
+        const data = result.data;
+        const status = result.statusText
         res.json({
             message: "Your monthly recharge was successful",
-            result
+            status,
+            data
         })
          
     })
@@ -55,9 +67,12 @@ function getAmountForAProduct(req, res, next){
     DSTVService.getAmountForAProduct(req.body)
     .then((result) => {
         debug("Amount for a product DATA" + " " + result);
+        const data = result.data;
+        const status = result.statusText
         res.json({
             message: "The amount for a product was succesfully retrieved",
-            result
+            status,
+            data
         })
          
     })
@@ -68,9 +83,12 @@ function  validate(req, res, next){
     DSTVService.validate(req.body)
     .then((result) => {
         debug("Validate DATA" + " " + result);
+        const data = result.data;
+        const status = result.statusText
         res.json({
             message: "Your smart card number was validated succesfully",
-            result
+            status,
+            data
         })
          
     })

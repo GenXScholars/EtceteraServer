@@ -1,4 +1,4 @@
-const debug = require("debug");
+const debug = require("debug")("app:FCARDSERVICES");
 const Wallet = require("../../../models/walletModel");
 const axios = require("axios").default;
 
@@ -7,20 +7,21 @@ const axios = require("axios").default;
 const SecretKey = require("../../../../config/constants").FlutterWaveSecretKey;
 const PubicKey = require("../../../../config/constants").FlutterwavePubicKey;
 
+
    // params for test 
-   let flightID = "123949494DC";
-   cardno ="5438898014560229" ;
-   cvv = "564";
-   expirymonth = "10";
-   expiryyear = "31";
-   currency = "NGN";
-   amount = "100";
-   country = "";
-   phonenumber ="";
-   email = "user@flw.com";
-   firstname = "Ogaga";
-   lastname = "Adjaro";
-   IP = "rdyfxcfucxfyucfyh";
+   let flightID = "123949494DC",
+   cardno ="5531886652142950",
+   cvv = " 564",
+   expirymonth = "09",
+   expiryyear = "22",
+   currency = "NGN",
+   amount = "100",
+   country = "NG",
+   phonenumber ="08162968926",
+   email = "user@flw.com",
+   firstname = "Ogaga",
+   lastname = "Adjaro",
+   IP = "",
    tnxf = "MC-3243e";
 
 
@@ -50,9 +51,8 @@ async function initiateCardFunding(passedBodyParams) {
   
     // get a hold of the body params
     // const { cardno, cvv, expirymonth, expiryyear, currency, country, amount, email, phonenumber, firstname, lastname, IP  } = passedBodyParams;
- 
-    return await rave.initiatePayment({
-      
+    debug()
+    const payment =  await rave.initiatePayment({
         "PBFPubKey": PubicKey, //merchant pub key
         "cardno": cardno,
         "cvv": cvv,
