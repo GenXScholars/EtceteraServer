@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = Object.freeze({
     PROTOCOL: (process.env.NODE_ENV === 'development') ? 'http://' : 'http://',
     SERVER_NAME : 'localhost:8080/',
     APP_VERSION : '1.0.0',
@@ -37,4 +37,4 @@ module.exports = {
     FlutterwavePubicKey : "FLWPUBK_TEST-540f85a9dc35777f0c911a56b4f388a4-X",
     FlutterWaveSecretKey : "FLWSECK_TEST-c87625893dd1c07a03fc8162a7e24a06-X"
 
-}
+})
