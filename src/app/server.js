@@ -124,7 +124,7 @@ var options = {
 
 // configure api-docs ------------ends
 
-app.listen( config.PORT, ()=>{
+app.listen( process.env.port || 8080, ()=>{
   console.log("server running on port" + " " + config.PORT)
 } );
 
