@@ -112,17 +112,7 @@ app.use("/", (req, res, next)=> {
         message: "the oficial api of vineBill app"
     })
 })
-// configure api-docs ----------starts
 
-var options = {
-    swaggerOptions: {
-      customJs: "/custom.js",
-    }
-  }
-  // router.use("/api-docs", swaggerUi.serve);
-  // router.get("/api-docs", swaggerUi.setup(swaggerDocument));
-
-// configure api-docs ------------ends
 app.listen( config.PORT, ()=>{
   debug("server running on port" + " " + config.PORT)
 } );
