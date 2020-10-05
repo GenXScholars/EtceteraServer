@@ -123,10 +123,10 @@ var options = {
   // router.get("/api-docs", swaggerUi.setup(swaggerDocument));
 
 // configure api-docs ------------ends
+const port = process.env.PORT || 8080
 
-app.listen( process.env.PORT, ()=>{
-  debug(process.env.PORT);
-  debug("server running on port" + " " + process.env.PORT)
+app.listen( port, ()=>{
+  debug("server running on port" + " " + port)
 } );
 
 module.exports = app;
