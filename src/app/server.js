@@ -14,7 +14,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const jwt = require("../_helpers/jwt");
 const errorHandler = require("../_helpers/errorhandler");
-const config = require("../config/constants");
+// const config = require("../config/constants");
  require("../config/dbconnection");
 
 
@@ -124,8 +124,9 @@ var options = {
 
 // configure api-docs ------------ends
 
-app.listen( process.env.port || 8080, ()=>{
-  console.log("server running on port" + " " + config.PORT)
+app.listen( process.env.PORT, ()=>{
+  debug(process.env.PORT);
+  debug("server running on port" + " " + process.env.PORT)
 } );
 
 module.exports = app;
