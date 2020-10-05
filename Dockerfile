@@ -13,3 +13,5 @@ RUN rm -rf src/
 EXPOSE 8080
 
 CMD [ "node", "src/app/server.js" ]
+
+RUN deploy vinebillcloud
