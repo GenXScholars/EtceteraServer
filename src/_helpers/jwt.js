@@ -30,7 +30,8 @@ function jwt() {
             "/api/v1/merchant/sign-up",
             "/api/v1/user/login",
             "/api/v1/merchant/login",
-            "/api-docs"
+            "/api-docs",
+            "/favicon.ico"
         ]
     });
     

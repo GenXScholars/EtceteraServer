@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require('dotenv').config()
 const router = require("express").Router();
 const cors = require("cors");
 const compression = require('compression');
@@ -14,7 +15,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const jwt = require("../_helpers/jwt");
 const errorHandler = require("../_helpers/errorhandler");
-const config = require("../config/constants");
  require("../config/dbconnection");
 
 
@@ -108,13 +108,14 @@ app.use(dstvRouter);
 app.use(errorHandler);
 
 app.use("/", (req, res, next)=> {
+  debug(process.env.NODE_ENV)
     res.status(200).json({
         message: "the oficial api of vineBill app"
     })
 })
 
 app.listen( process.env.PORT || 8080, ()=>{
-  debug("server running on port" + " " + config.PORT)
+  debug("server running on port" + " " )
 } );
 
 module.exports = app;
