@@ -113,7 +113,7 @@ app.use("/", (req, res, next)=> {
     })
 })
 
-app.listen( config.PORT, ()=>{
+app.listen( process.env.PORT || 8080, ()=>{
   debug("server running on port" + " " + config.PORT)
 } );
 
