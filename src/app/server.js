@@ -108,13 +108,13 @@ app.use(dstvRouter);
 app.use(errorHandler);
 
 app.use("/", (req, res, next)=> {
-  debug(process.env.NODE_ENV)
+  debug(process.env.PORT)
     res.status(200).json({
         message: "the oficial api of vineBill app"
     })
 })
 
-app.listen( process.env.PORT || 8080, ()=>{
+app.listen( process.env.PORT || 80, ()=>{
   debug("server running on port" + " " )
 } );
 
