@@ -4,6 +4,7 @@ require('dotenv').config()
 const router = require("express").Router();
 const cors = require("cors");
 const compression = require('compression');
+const config = require("../config/constants");
 
 const debug = require("debug")("app")
 const morgan = require("morgan");
@@ -114,8 +115,8 @@ app.use("/", (req, res, next)=> {
     })
 })
 
-app.listen( process.env.PORT || 80, ()=>{
-  debug("server running on port" + " " )
+app.listen( config.PORT, ()=>{
+  debug("server running on port" + " " + config.PORT )
 } );
 
 module.exports = app;

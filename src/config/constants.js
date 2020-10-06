@@ -1,4 +1,4 @@
-module.exports = Object.freeze({
+module.exports = ({
     PROTOCOL: (process.env.NODE_ENV === 'development') ? 'http://' : 'http://',
     SERVER_NAME : 'localhost:8080/',
     APP_VERSION : '1.0.0',
