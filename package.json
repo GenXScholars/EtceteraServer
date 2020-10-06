@@ -4,7 +4,7 @@
   "description": "Epayment Server",
   "main": "server.js",
   "scripts": {
-    "start": "node src/app/server.js",
+    "start": "NODE_ENV=production node src/app/server.js",
     "dev": "SET DEBUG=app, app* & nodemon src/app/server.js",
     "test": "mocha --timeout 20000 --exit"
   },
