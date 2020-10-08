@@ -4,6 +4,7 @@ require('dotenv').config()
 const router = require("express").Router();
 const cors = require("cors");
 const compression = require('compression');
+const dns = require('dns');
 const config = require("../config/constants");
 
 const debug = require("debug")("app")
@@ -115,7 +116,13 @@ app.use("/", (req, res, next)=> {
     })
 })
 
-app.listen( config.PORT, ()=>{
+
+dns.lookupService('127.0.0.1', 22, (err, hostname, service) => {
+  debug(hostname, service);
+    // Prints: localhost ssh
+});
+
+app.listen(config.PORT, ()=>{
   debug("server running on port" + " " + config.PORT )
 } );
 
