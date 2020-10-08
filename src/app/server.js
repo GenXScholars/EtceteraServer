@@ -115,7 +115,7 @@ app.use("/", (req, res, next)=> {
     })
 })
 
-app.listen( 8080, ()=>{
+app.listen( config.PORT, ()=>{
   debug("server running on port" + " " + config.PORT )
 } );
 
