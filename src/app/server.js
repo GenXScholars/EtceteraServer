@@ -121,9 +121,9 @@ dns.lookupService('127.0.0.1', 22, (err, hostname, service) => {
   debug(hostname, service);
     // Prints: localhost ssh
 });
-
-app.listen(config.PORT, ()=>{
-  debug("server running on port" + " " + config.PORT )
+const port = process.env.PORT || 4000;
+app.listen(port, ()=>{
+  debug("server running on port" + " " + port )
 } );
 
 module.exports = app;
