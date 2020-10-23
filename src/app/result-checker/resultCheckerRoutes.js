@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../paths/resultCheckPath");
+const paths = require("../paths/edu-results/resultCheckPath");
 const RsltCheckerController = require('./resultChecker');
 
 // methods

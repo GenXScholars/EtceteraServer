@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../../../paths/fundFromFirstBnkPaths");
+const paths = require("../../../paths/fund-wallet/fundFromFirstBnkPaths");
 const FirstBnkController = require("./fundWalletFromFirstBnk");
 
 // methods

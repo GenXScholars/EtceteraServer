@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../../../paths/walletsInDbPaths");
+const paths = require("../../../paths/new-wallets-paths.js/walletsInDbPaths");
 const WalletControllers = require("./walletsInDB");
 
 // methods

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../../../paths/fundWalletFrmGTPaths");
+const paths = require("../../../paths/fund-wallet/fundWalletFrmGTPaths");
 const GTBnkController = require("./fundWalletFromGTBnk");
 
 // methods
