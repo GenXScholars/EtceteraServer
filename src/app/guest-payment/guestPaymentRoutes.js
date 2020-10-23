@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../paths/guestPaymentPaths");
+const paths = require("../paths/payment/guestPaymentPaths");
 const GuestPaymentController = require('./guestPayment');
 
 // methods

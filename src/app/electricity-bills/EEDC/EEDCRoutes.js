@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const paths = require("../../paths/EEDCpath");
+const paths = require("../../paths/e-bills/EEDCpath");
 const EEDCController = require("./EEDC");
 
 // methods

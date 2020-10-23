@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../paths/mobile_ng_recharge");
+const paths = require("../paths/mobile-recharge/mobile_ng_recharge");
 const ngAirtimeController = require("./mobile_ng_recharge");
 
 // methods

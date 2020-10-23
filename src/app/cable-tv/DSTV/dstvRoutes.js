@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../../paths/dstvRecharge");
+const paths = require("../../paths/cable-tv/dstvRecharge");
 const DSTVController = require('./dstv');
 
 // methods

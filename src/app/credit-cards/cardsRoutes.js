@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const paths = require("../paths/creditCardsApiPaths");
+const paths = require("../paths/atm-cards/creditCardsApiPaths");
 const CreditCardsController = require('./cards');
 
 // methods

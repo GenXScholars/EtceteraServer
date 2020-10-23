@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../../paths/mtn_data");
+const paths = require("../../paths/mobile-recharge/mtn_data");
 const MtnDataController = require("./mtn_data");
 
 // methods

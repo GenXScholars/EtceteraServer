@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../paths/adminPaths");
+const paths = require("../paths/users/adminPaths");
 const AdminController = require("./admin");
 
 // methods

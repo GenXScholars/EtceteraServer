@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../paths/usersPaths");
+const cors = require("cors");
+const paths = require("../paths/users/usersPaths");
 
 
 // to be added for multiple api calls
+
+router.use(cors({
+    origin:"*",
+    methods:" GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders:"content-Type, Authorization, Origin X-Requested, Accept"
+  }))
 
 // var whitelist = ['http://example1.com', 'http://example2.com']
 // var corsOptions = {

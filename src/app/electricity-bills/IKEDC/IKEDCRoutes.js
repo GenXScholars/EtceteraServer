@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const paths = require("../../paths/IKEDCpaths");
+const paths = require("../../paths/e-bills/IKEDCpaths");
 const IKEDCController = require("./IKEDC");
 
 // methods

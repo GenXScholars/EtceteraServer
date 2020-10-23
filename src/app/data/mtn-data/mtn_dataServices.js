@@ -13,7 +13,7 @@ const axiosCall = axios.create({
 
 
 async function rechargeOneTimeData(passedBodyParams) {
-  return await axiosCall.post("/fly_buy",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy",
@@ -35,7 +35,7 @@ async function rechargeOneTimeData(passedBodyParams) {
 
 
 async function  rechargeBulkData(){
-  return await axiosCall.post("/fly_buy_bulk",
+  return await axiosCall.post("",
   {
     "secret_key": SecretKey,
     "service": "fly_buy_bulk",

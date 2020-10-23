@@ -10,18 +10,18 @@ const omitPassword = require("../../_helpers/helperFuncs").omitPassword;
 
 
 async function  userLogin(req, res, next){
-    let username = req.body.username;
+    let email = req.body.email;
     let password = req.body.password;
     console.log("password" + req.body.password);
     console.log("username" + req.body.username);
     console.log("ipAddress" + " " + req.ip);
 
-    if(!username || !password){
-       res.status(404).json({
-           message: "username or password cannot be empty"
+    if(!email || !password){
+       return res.status(404).json({
+           message: "email or password cannot be empty"
        })
     }
-    const dbuser = await User.findOne({username});
+    const dbuser = await User.findOne({email});
     
     console.log(dbuser);
     if(dbuser){
@@ -42,15 +42,15 @@ async function  userLogin(req, res, next){
     //    })
 
       //Send back the token to the user
-       res.status(200).json({
+       return res.status(200).json({
            user:omitPassword(dbuser._doc),
           token
          })
        } 
      })      
     } else {
-        res.status(404).json({
-            message: "username or password inccorect"
+        return res.status(404).json({
+            message: "email or password inccorect"
         })
     }
 }

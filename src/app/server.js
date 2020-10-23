@@ -40,7 +40,7 @@ app.use(jwt());
 app.use(cors({
   origin:"*",
   methods:" GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders:"content-Type, Authorization, Origin XRequested, Accept"
+  // allowedHeaders:['Content-Type', 'Authorization', 'Origin X-Requested', 'Accept']
 }));
 // parse application/x-www-;form-urlencoded
 app.use(bodyParser.json());
@@ -122,8 +122,8 @@ dns.lookupService('127.0.0.1', 22, (err, hostname, service) => {
     // Prints: localhost ssh
 });
 const port = process.env.PORT || 4000;
-app.listen(port, ()=>{
-  debug("server running on port" + " " + port )
+app.listen(config.PORT , ()=>{
+  debug("server running on port" + " " + config.PORT);
 } );
 
 module.exports = app;
