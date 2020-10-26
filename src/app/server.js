@@ -123,8 +123,8 @@ dns.lookupService('127.0.0.1', 22, (err, hostname, service) => {
 })
 
 const port = process.env.PORT || 8080;
-app.listen(config.PORT , ()=>{
-  debug("server running on port" + " " + config.PORT);
+app.listen(port , ()=>{
+  debug("server running on port" + " " + port);
 });
 
 module.exports = app;
