@@ -1,15 +1,15 @@
 FROM node:12
 
-WORKDIR /
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
 RUN npm install --only=production
 
-COPY . .
+COPY . /usr/src/app
 
 RUN rm -rf src/
 
 EXPOSE 8080
 
-CMD [ "node", "src/app/server.js" ]
+CMD [ "npm", "start" ]
