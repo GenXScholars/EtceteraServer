@@ -10,4 +10,4 @@ steps:
   entrypoint: gcloud
   args: ['run', 'deploy', 'vinebillcloud', '--image', 'gcr.io/vinbillserver/vinebillcloud', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 images:
-- gcr.io/vinbillserver/vinebillcloud
+- gcr.io/vinbillServer/vinebillcloud
