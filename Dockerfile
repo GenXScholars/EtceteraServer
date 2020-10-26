@@ -10,6 +10,4 @@ COPY . /usr/src/app
 
 RUN rm -rf src/
 
-EXPOSE 8080
-
 CMD [ "npm", "start" ]

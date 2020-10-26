@@ -120,10 +120,11 @@ app.use("/", (req, res, next)=> {
 dns.lookupService('127.0.0.1', 22, (err, hostname, service) => {
   debug(hostname, service);
     // Prints: localhost ssh
-});
-const port = process.env.PORT || 4000;
+})
+
+const port = process.env.PORT || 8080;
 app.listen(config.PORT , ()=>{
   debug("server running on port" + " " + config.PORT);
-} );
+});
 
 module.exports = app;
