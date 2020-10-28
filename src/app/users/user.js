@@ -12,8 +12,8 @@ const omitPassword = require("../../_helpers/helperFuncs").omitPassword;
 async function  userLogin(req, res, next){
     let email = req.body.email;
     let password = req.body.password;
-    console.log("password" + req.body.password);
-    console.log("username" + req.body.username);
+    console.log("password" + " " +  req.body.password);
+    console.log("email" + " " + req.body.email);
     console.log("ipAddress" + " " + req.ip);
 
     if(!email || !password){
